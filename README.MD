@@ -1,4 +1,5 @@
-Agenda tugas akhir
+//Agenda tugas akhir//
+This file was created by : Faizal Adhitama
 
 1. Login/Logout
    Yang harus dikerjakan :
@@ -82,12 +83,10 @@ Agenda tugas akhir
      nama,isi,tanggal
    29 - 1 Desember 2016
 
-10.Perbaikan bugs
+10. Perbaikan bugs
    - Cek error
    - Perbaikan algoritma
    - Bugs animasi
    - Tombol tidak berfungsi
    - Logic error
    2 - 7 Desember 2016
-
-
