@@ -1,4 +1,4 @@
-//Agenda tugas akhir//
+- Agenda tugas akhir
 - This file was created by : Faizal Adhitama
 
 1. Login/Logout
