@@ -16,6 +16,14 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error()."</br>");
 }
 
+//Sql create database
+$sql = "CREATE DATABASE myDB";
+if (mysqli_query($conn, $sql)) {
+    echo "Database created successfully</br></br>";
+} else {
+    echo "Error creating database: " . mysqli_error($conn) . "</br></br>";
+}
+
 // sql to create table
 $sql = "CREATE TABLE MyGuests (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
