@@ -6,7 +6,7 @@
    - Client validation (javascript)
    - Server validation (database -> php)
    - Logout (Cek session)
-   - 13 - 15 November 2016
+   - 14 - 16 November 2016
 
 2. Melihat daftar buku
    Yang harus dikerjakan :
@@ -20,7 +20,7 @@
    - Belum login bisa melihat daftar buku
    - Tidak memakai PHP Session untuk cek sudah login
      atau belum
-   - 15 - 17 November 2016
+   - 16 - 18 November 2016
 
 3. Meminjam buku
    - Hanya bisa diakses ketika login (Cek session)
@@ -30,7 +30,7 @@
    - Disable button ketika stok 0
    - Stok buku berkurang ketika dipinjam
    - Di database user stok yang dipinjam user bertambah    
-   - 17 - 19 November 2016
+   - 18 - 20 November 2016
 
 4. Mengembalikan buku
    - User bisa mengembalikan buku yang dipinjam
@@ -40,7 +40,7 @@
      0
    - Jumlah buku yang ada di perpustakaan bertambah
    - User harus sudah login (Cek session)
-   - 19 - 21 November 2016
+   - 20 - 22 November 2016
 
 5. Melihat detail informasi buku dan review buku
    - 1 halaman berisi informasi buku
@@ -51,7 +51,7 @@
    - Review terdiri dari nama, tanggal, isi
    - tombol meminjam ada ketika user sudah login
      dan stok buku tidak 0   
-   - 21 - 23 November 2016   
+   - 22 - 24 November 2016   
 
 6. Membuat review
    - User bisa membuat review
@@ -59,7 +59,7 @@
    - Setelah disubmit akan disend ke page
    - Hanya bisa diakses ketika user sudah login 
      (Cek session)
-   - 23 - 25 November 2016
+   - 24 - 26 November 2016
 
 7. Menambah buku
    - Admin bisa membuat dan menyimpan detail buku
@@ -68,20 +68,20 @@
      ke halaman buku tersebut
    - Admin harus sudah login
      (Cek session)
-   - 25 - 27 November 2016
+   - 26 28 November 2016
 
 8. Desain tampilan
    - Tata letak
    - Background
    - Bootstrap
    - Animasi
-   - 27 - 29 November 2016
+   - 28 - 30 November 2016
 
 9. Submit dengan AJAX
    - Ajax menggunakan post
    - Variable yang diperlukan :
      nama,isi,tanggal
-   - 29 - 1 Desember 2016
+   - 30 - 2 Desember 2016
 
 10. Perbaikan bugs
    - Cek error
@@ -89,4 +89,5 @@
    - Bugs animasi
    - Tombol tidak berfungsi
    - Logic error
-   - 2 - 7 Desember 2016
+   - 3 - 7 Desember 2016
+NB: Agenda dapat berubah sewaktu-waktu
