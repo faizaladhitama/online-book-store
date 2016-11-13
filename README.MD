@@ -1,5 +1,6 @@
 - Agenda tugas akhir
 - This file was created by : Faizal Adhitama
+- NB: Agenda dapat berubah sewaktu-waktu
 
 1. Login/Logout
    Yang harus dikerjakan :
@@ -90,4 +91,3 @@
    - Tombol tidak berfungsi
    - Logic error
    - 3 - 7 Desember 2016
-NB: Agenda dapat berubah sewaktu-waktu
