@@ -63,7 +63,7 @@
 		$conn = connectDB();
 
 		$filename = 'personal_library.sql';
-		$sql = "CREATE DATABASE $database";
+		$sql = "CREATE DATABASE \"dump\"";
 		mysqli_query($conn, $sql);
 
 		$templine = '';
@@ -157,47 +157,47 @@
 		    	$penerbit = $row[4];
 		    	$deskripsi = $row[5];
 		    	$stok = $row[6];
-		    	echo "<li class=\"col-md-12 list-group-item\">
-					<div class=\"col-md-12 text-justify\">
-						<div id=\"gambar buku\" class=\"col-md-3\">
+		    	echo "<li class=\"col-md-12 col-sm-12 list-group-item\">
+					<div class=\"text-justify\">
+						<div id=\"gambar buku\" class=\"col-md-4 col-sm-4\">
 							<img src=\"$gambar\" class=\"img-responsive\">
 						</div>
-						<div id=\"identitas buku\" class=\"col-md-9\">
+						<div id=\"identitas buku\" class=\"col-md-12 col-sm-12\">
 							<div id=\"title\" class=\"panel\">
-								<p class=\"col-md-4\">Nama Buku
-									<span class=\"col-md-1 pull-right\">:</span>
+								<p class=\"col-md-3 col-sm-3\">Nama Buku
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
 								</p>
-								<p class=\"col-md-8\">$judul</p>
+								<p class=\"col-md-8 col-sm-8\">$judul</p>
 							</div>
 							<div id=\"author\" class=\"panel\">
-								<p class=\"col-md-4\">Pengarang
-									<span class=\"col-md-1 pull-right\">:</span>
+								<p class=\"col-md-3 col-sm-3\">Pengarang
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
 								</p>
-								<p class=\"col-md-8\">$pengarang</p>
+								<p class=\"col-md-8 col-sm-8\">$pengarang</p>
 							</div>
 							<div id=\"publisher\" class=\"panel\">
-								<p class=\"col-md-4\">Penerbit
-									<span class=\"col-md-1 pull-right\">:</span>
+								<p class=\"col-md-3 col-sm-3\">Penerbit
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
 								</p>
-								<p class=\"col-md-8\">$penerbit</p>
+								<p class=\"col-md-8 col-sm-8\">$penerbit</p>
 							</div>
 							<div id=\"description\" class=\"panel\">
-								<p class=\"col-md-4\">Deskripsi
-									<span class=\"col-md-1 pull-right\">:</span>
+								<p class=\"col-md-3 col-sm-3\">Deskripsi
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
 								</p>
-								<p class=\"col-md-8\">$deskripsi</p>
+								<p class=\"col-md-8 col-sm-8\">$deskripsi</p>
 							</div>
 							<div id=\"quantity\" class=\"panel\">
-								<p class=\"col-md-4\">Stok
-									<span class=\"col-md-1 pull-right\">:</span>
+								<p class=\"col-md-3 col-sm-3\">Stok
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
 								</p>
-								<p class=\"col-md-8\">$stok</p>
+								<p class=\"col-md-8 col-sm-8\">$stok</p>
 							</div>
-							<div id=\"button\" class=\"panel pull-right\">
+							<div id=\"button\" class=\"panel col-md-12 col-sm-12\">
 								<form class=\"form\" method=\"post\">
 									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
-									<button type=\"submit\" class=\"btn btn-danger\" name=\"command\" value=\"loan\">Pinjam Buku</button>
-									<button type=\"submit\" class=\"btn btn-danger\" name=\"command\" value=\"return\">Kembalikan buku</button>
+									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"loan\">Pinjam Buku</button>
+									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"return\">Kembalikan buku</button>
 								</form>
 							</div>
 						</div>

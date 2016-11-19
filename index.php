@@ -40,9 +40,9 @@
 			  </div>
 			</nav>
 		</div>
-		<div class="panel container">
+		<div class="panel">
 			<div id="book" class="col-md-12">
-				<ul class="list-group">
+				<ul class="list-group col-md-12">
 					<?php 
 						include("service.php");
 
