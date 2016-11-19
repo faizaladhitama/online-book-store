@@ -18,7 +18,7 @@
 		?>
 		</div>
 		<h2>Login Form</h2>
-		<form class="form-horizontal" id="loginForm" action="service.php?perintah=login" method="POST">
+		<form class="form-horizontal" id="loginForm" action="service.php" method="POST">
 			<div class="form-group">
 				<label class="control-label col-sm-2">Username : </label>
 				<div class="col-sm-6">
@@ -39,12 +39,11 @@
 					<span id="span4"></span>
 				</div>
 			</div>
+			<input type="hidden" name="command" value="login"/>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input id="login-btn" type="submit" class="submit" Value="Submit" class="btn btn-primary"/>
 				</div>
-			</div>
-			<div id="percobaan">
 			</div>
 		</form>
 	</div>
