@@ -23,7 +23,7 @@
    - Tidak memakai PHP Session untuk cek sudah login
      atau belum
    - 16 - 18 November 2016
-   - Status : Udah selesai, tinggal dibagusin cssnya
+   - Status : Udah selesai, tinggal dibagusin cssnya, ga responsive, kalo di resive malah berantakan
 
 3. Meminjam buku
    - Hanya bisa diakses ketika login (Cek session)
