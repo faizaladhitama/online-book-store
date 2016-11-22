@@ -3,44 +3,59 @@
 	header("Content-Type: text/html; charset=ISO-8859-1");
 	$command = "";
 	if(isset($_POST['command'])){
-		$command = $_POST['command'];
+		$command = $_POST['command']; 
 	}
 	else if(!isset($_SESSION['import_database'])){
 		$command = "import_database";
 		$_SESSION['import_database'] = true;
 	}
-	if(!isset($_SESSION['login'])){
-		$_SESSION['login'] = false;
+	else if(isset($_GET['command'])){
+		$command = $_GET['command']; 
 	}
-	
+
+	if($_SERVER['PHP_SELF'] == "/a_12/service.php"){
+		if($_SERVER['REQUEST_METHOD'] == "POST" || ($_SERVER['REQUEST_METHOD'] =="GET" && count($_GET) > 0)){
+			
+		}
+		else{
+			header('HTTP/1.0 404 Not Found');
+	    	echo "<h1>Error 404 Not Found</h1>";
+	    	echo "The page that you have requested could not be found.";
+			exit();
+		}
+	}
 	switch ($command) {
 		case 'import_database':
 			import_database();
 			break;
 		case 'login':
 			# code...
-			$username = "";	
-			$password = "";	
-			if(!$_SESSION['login'] && isset($_POST['username'])){
-				$username = $_POST['username'];	
-				$password = $_POST['password'];	
-			}
-			else if($_SESSION['login']){
+			if(isset($_SESSION['login']) && $_SESSION['login']){
 				header("Location: index.php");
 			}
 			else{
-				header("Location: login.php");
-			}
-			//print_database($mysql_host,$mysql_username,$mysql_password,$mysql_database);
+				$username = $_POST['username'];	
+				$password = $_POST['password'];
 			
-			$cek = cek_user($username,$password);
-			if(!$cek){
-				$_SESSION['error'] = $_SESSION['username'];
-				$_SESSION['warning'] = "Username atau password tidak ada";
+				$cek = cek_user($username,$password);
+				if($cek){
+					header("Location:index.php");
+				}
+				else{
+					$_SESSION['warning'] = "Username atau password tidak ada";
+					header("Location: login.php");
+				}
 			}
 			break;
 		case 'submit_review':
 			# code...
+			break;
+		case 'logout' :
+			logout();
+			break;
+		case 'bookpage' :
+			echo "masuk";
+			bookpage();
 			break;
 		default:
 			# code...
@@ -113,7 +128,7 @@
 	function cek_user($user,$pass){
 		$conn = connectDB();
 
-		$sql = "SELECT username,password FROM user";
+		$sql = "SELECT * FROM user";
 		mysqli_query($conn, $sql);
 
 		$result = mysqli_query($conn, $sql);
@@ -122,16 +137,31 @@
 		    // output data of each row
 		    while($row = mysqli_fetch_assoc($result)) {
 		        if($user == $row['username'] && $pass == $row['password']){
+		        	$_SESSION['id'] = $row['user_id']; 
 					$_SESSION['login'] = true;
 					$_SESSION['username'] = $user;
-					$_SESSION['password'] = $pass;
-					echo "login sukses";
+					$_SESSION['role'] = $row['role'];
 					return true;
 		        }
 		    }
 		} else {
 		    return false;
 		}
+	}
+
+	function logout(){
+		session_destroy();
+		header("Location:index.php");
+		// session_unset($_SESSION['id']);
+		// session_unset($_SESSION['login']);
+		// session_unset($_SESSION['username']);
+		// session_unset($_SESSION['role']);
+	}
+
+	function bookpage(){
+		$idbuku = $_GET['idbuku'];
+		header("Location:halaman_buku.php?id=$idbuku");
+
 	}
 
 	function generateBook(){
@@ -194,8 +224,9 @@
 								<p class=\"col-md-8 col-sm-8\">$stok</p>
 							</div>
 							<div id=\"button\" class=\"panel col-md-12 col-sm-12\">
-								<form class=\"form\" method=\"post\">
+								<form action=\"service.php\" class=\"form\" method=\"get\">
 									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
+									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Halaman Buku</button>
 									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"loan\">Pinjam Buku</button>
 									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"return\">Kembalikan buku</button>
 								</form>

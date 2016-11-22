@@ -1,3 +1,9 @@
+<?php 
+	session_start();
+	if(isset($_SESSION['login']) && $_SESSION['login']){
+		header("Location: index.php");
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +13,10 @@
 	<script src="javascript.js"></script>
 </head>
 <body>
-	<?php session_start()?>
 	<div class="container">
 		<div id="warning">
 		<?php
-			if(isset($_SESSION['warning']) && !$_SESSION['login']){ 
+			if(isset($_SESSION['warning'])){ 
 				echo $_SESSION['warning'];
 				session_unset($_SESSION['warning']);
 			}

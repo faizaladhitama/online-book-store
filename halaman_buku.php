@@ -1,9 +1,10 @@
-<?php 
-	include("service.php") ;
+<?php
+	//include("service.php");
 ?>
+
 <html>
 	<head>
-		<title>Perpustakaan Online</title>
+		<title>Halaman Buku</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -16,28 +17,17 @@
 		</div>
 		<div id="navbar">
 			<nav class="navbar navbar-inverse">
-				<div class="navbar-header">
-			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>                        
-			      </button>
-			    </div>
 			    <div class="collapse navbar-collapse" id="myNavbar">
 			      <ul class="nav navbar-nav">
-			        <li class="active"><a href="index.php">Home</a></li>
-			        <?php 
-			        	if(isset($_SESSION['login']) && $_SESSION['login']){
-			        		echo "<li><a href=\"user.php\">Halaman Profile</a></li>";
-			        	}
-			        ?>
+			        <li><a href="index.php">Home</a></li>
+			        <li class="active"><a href="user.php">Halaman Profile</a></li>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Akses Cepat<span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			            <li><a href="http://www.w3schools.com/" target="_blank">W3 School</a></li>
 			            <li><a href="http://scele.cs.ui.ac.id/" target="_blank">Scele</a></li>
 			            <li><a href="http://google.com/" target="_blank">Google</a></li>
 			          </ul>
-			         </li> 
+			         </li>
 			        <li><a href="#">Ketentuan Peminjaman</a></li>
 			        <li><a href="#">About Us</a></li>
 			      </ul>
@@ -67,13 +57,25 @@
 			  </div>
 			</nav>
 		</div>
-		<div class="panel">
-			<div id="book" class="col-md-12">
-				<ul class="list-group col-md-12">
-					<?php 
-						generateBook();
-					?>
-				</ul>
+		<div class="container">
+			<div id="layout" class="row">
+				<div id="buku" class="col-md-9">
+					<div id="gambar" class="panel">
+						<img src="gambar0.jpg" class="img-responsive">
+					</div>
+					<div id="identitas" class="panel">
+						asdadasdadsadasdadasdsadasdasddasd
+					</div>
+					<div id="button" class="panel">
+						<button>AAAAAAAAA</button>
+					</div>
+				</div>
+				<div id="warning" class="col-md-3">
+					Buku bla bla bla
+				</div>
+			</div>
+			<div id="review">
+				AAAAAAAAAAAAAAA
 			</div>
 		</div>
 	</body>
