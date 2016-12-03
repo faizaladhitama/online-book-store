@@ -9,6 +9,7 @@
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 		<div id="header" class="container-fluid page-header">
@@ -67,13 +68,11 @@
 			  </div>
 			</nav>
 		</div>
-		<div class="panel">
-			<div id="book" class="col-md-12">
-				<ul class="list-group col-md-12">
-					<?php 
-						generateBook();
-					?>
-				</ul>
+		<div class="container">
+			<div id="book" class="text-center">
+				<?php 
+					generateHome();
+				?>
 			</div>
 		</div>
 	</body>

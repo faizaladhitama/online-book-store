@@ -1,5 +1,5 @@
 <?php
-	//include("service.php");
+	include("service.php");
 ?>
 
 <html>
@@ -60,22 +60,46 @@
 		<div class="container">
 			<div id="layout" class="row">
 				<div id="buku" class="col-md-9">
-					<div id="gambar" class="panel">
-						<img src="gambar0.jpg" class="img-responsive">
-					</div>
-					<div id="identitas" class="panel">
-						asdadasdadsadasdadasdsadasdasddasd
-					</div>
-					<div id="button" class="panel">
-						<button>AAAAAAAAA</button>
-					</div>
+					<?php 
+						generateBookPage();
+					?>
 				</div>
 				<div id="warning" class="col-md-3">
 					Buku bla bla bla
 				</div>
 			</div>
 			<div id="review">
-				AAAAAAAAAAAAAAA
+				<div class="panel">
+					<div id="user">
+						Bambang
+					</div>
+					<div id="paragraph">
+						Bukunya gahoelllllllllllllllll bingits !
+					</div>
+				</div>
+				<div class="panel">
+					<div id="user">
+						Joko
+					</div>
+					<div id="paragraph">
+						Bukunya gahoelllllllllllllllll bingits !
+					</div>
+				</div>
+				<div class="panel">
+					<div id="user">
+						Ketut
+					</div>
+					<div id="paragraph">
+						Bukunya gahoelllllllllllllllll bingits !
+					</div>
+				</div>
+				<div class="panel">
+					<div id="tulis review">
+						Kotak review
+					</div>
+					<div id="box">
+						Tulis disini
+					</div>
 			</div>
 		</div>
 	</body>

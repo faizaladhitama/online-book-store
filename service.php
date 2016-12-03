@@ -152,16 +152,132 @@
 	function logout(){
 		session_destroy();
 		header("Location:index.php");
-		// session_unset($_SESSION['id']);
-		// session_unset($_SESSION['login']);
-		// session_unset($_SESSION['username']);
-		// session_unset($_SESSION['role']);
 	}
 
 	function bookpage(){
 		$idbuku = $_GET['idbuku'];
 		header("Location:halaman_buku.php?id=$idbuku");
+	}
 
+	function generateReview(){
+		
+	}
+
+	function generateBookPage(){
+		$mysql_host = 'localhost';
+		$mysql_username = 'root';
+		$mysql_password = '';
+		$mysql_database = 'dump';
+
+		$conn = connectDB();
+
+		$thisid = $_GET['id'];
+
+		$sql = "SELECT * FROM book WHERE book_id=$thisid";
+		mysqli_query($conn, $sql);
+
+		$result = mysqli_query($conn, $sql);
+		//echo $result;
+		while($row = mysqli_fetch_row($result)) {
+			if (mysqli_num_rows($result) > 0) {
+		    	$idbuku = $row[0];
+		    	$gambar = $row[1];
+		    	$judul = $row[2];
+		    	$pengarang = $row[3];
+		    	$penerbit = $row[4];
+		    	$deskripsi = $row[5];
+		    	$stok = $row[6];
+
+		    	echo "<div id=\"gambar\" class=\"panel\">
+						<img src=\"$idbuku.jpg\" class=\"img-responsive\">
+					</div>
+					<div id=\"identitas\" class=\"panel\">
+						<div id=\"title\" class=\"panel\">
+								<p class=\"col-md-3 col-sm-3\">Nama Buku
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
+								</p>
+								<p class=\"col-md-8 col-sm-8\">$judul</p>
+							</div>
+							<div id=\"author\" class=\"panel\">
+								<p class=\"col-md-3 col-sm-3\">Pengarang
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
+								</p>
+								<p class=\"col-md-8 col-sm-8\">$pengarang</p>
+							</div>
+							<div id=\"publisher\" class=\"panel\">
+								<p class=\"col-md-3 col-sm-3\">Penerbit
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
+								</p>
+								<p class=\"col-md-8 col-sm-8\">$penerbit</p>
+							</div>
+							<div id=\"description\" class=\"panel\">
+								<p class=\"col-md-3 col-sm-3\">Deskripsi
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
+								</p>
+								<p class=\"col-md-8 col-sm-8\">$deskripsi</p>
+							</div>
+							<div id=\"quantity\" class=\"panel\">
+								<p class=\"col-md-3 col-sm-3\">Stok
+									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
+								</p>
+								<p class=\"col-md-8 col-sm-8\">$stok</p>
+							</div>
+					</div>
+					<div id=\"button\" class=\"panel\">
+						<form action=\"service.php\" class=\"form\" method=\"get\">
+							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
+							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"loan\">Pinjam Buku</button>
+							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"return\">Kembalikan buku</button>
+						</form>
+					</div>";
+			} else {
+			    return false;
+			}
+		}
+	}
+
+	function generateHome(){
+		$mysql_host = 'localhost';
+		$mysql_username = 'root';
+		$mysql_password = '';
+		$mysql_database = 'dump';
+
+		$conn = connectDB();
+
+		$sql = "SELECT * FROM book";
+		mysqli_query($conn, $sql);
+
+		$result = mysqli_query($conn, $sql);
+		//echo $result;
+		if (mysqli_num_rows($result) > 0) {
+		    // output data of each row
+		    while($row = mysqli_fetch_row($result)) {
+		    	$idbuku = $row[0];
+		    	$gambar = $row[1];
+		    	$judul = $row[2];
+		    	$pengarang = $row[3];
+		    	$penerbit = $row[4];
+		    	$deskripsi = $row[5];
+		    	$stok = $row[6];
+
+		    	if($idbuku%2 == 1){
+		    		echo "<div class=\"row\">";
+		    	}
+		    	echo "<div class=\"col-md-6 panel\">
+						<img src=\"$idbuku.jpg\" class=\"img-responsive\"/>
+						<p>$judul</p>
+						<form action=\"service.php\" class=\"form\" method=\"get\">
+							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
+							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Halaman Buku</button>
+						</form>
+					</div>";
+				if($idbuku%2==0){
+					echo"</div>";
+				}
+		    }
+		} else {
+		    return false;
+		}
 	}
 
 	function generateBook(){
@@ -190,7 +306,7 @@
 		    	echo "<li class=\"col-md-12 col-sm-12 list-group-item\">
 					<div class=\"text-justify\">
 						<div id=\"gambar buku\" class=\"col-md-4 col-sm-4\">
-							<img src=\"$gambar\" class=\"img-responsive\">
+							<img src=\"$idbuku.jpg\" class=\"img-responsive\">
 						</div>
 						<div id=\"identitas buku\" class=\"col-md-12 col-sm-12\">
 							<div id=\"title\" class=\"panel\">
