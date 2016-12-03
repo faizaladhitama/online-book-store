@@ -20,7 +20,11 @@
 			    <div class="collapse navbar-collapse" id="myNavbar">
 			      <ul class="nav navbar-nav">
 			        <li><a href="index.php">Home</a></li>
-			        <li class="active"><a href="user.php">Halaman Profile</a></li>
+			        <?php 
+			        	if(isset($_SESSION['login']) && $_SESSION['login']){
+			        		echo "<li><a href=\"user.php\">Halaman Profile</a></li>";
+			        	}
+			        ?>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Akses Cepat<span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			            <li><a href="http://www.w3schools.com/" target="_blank">W3 School</a></li>
@@ -28,7 +32,6 @@
 			            <li><a href="http://google.com/" target="_blank">Google</a></li>
 			          </ul>
 			         </li>
-			        <li><a href="#">Ketentuan Peminjaman</a></li>
 			        <li><a href="#">About Us</a></li>
 			      </ul>
 			      <ul class="nav navbar-nav navbar-right">
@@ -69,37 +72,19 @@
 				</div>
 			</div>
 			<div id="review">
-				<div class="panel">
-					<div id="user">
-						Bambang
-					</div>
-					<div id="paragraph">
-						Bukunya gahoelllllllllllllllll bingits !
-					</div>
+				<div id="box" class="panel">
+					Kotak review
 				</div>
+				<?php 
+					generateReview();
+				?>
 				<div class="panel">
-					<div id="user">
-						Joko
-					</div>
-					<div id="paragraph">
-						Bukunya gahoelllllllllllllllll bingits !
-					</div>
-				</div>
-				<div class="panel">
-					<div id="user">
-						Ketut
-					</div>
-					<div id="paragraph">
-						Bukunya gahoelllllllllllllllll bingits !
-					</div>
-				</div>
-				<div class="panel">
-					<div id="tulis review">
-						Kotak review
-					</div>
 					<div id="box">
-						Tulis disini
+						<form>
+							<textarea placeholder="Tulis disini"></textarea>
+						</form>
 					</div>
+				</div>
 			</div>
 		</div>
 	</body>

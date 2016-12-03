@@ -54,8 +54,10 @@
 			logout();
 			break;
 		case 'bookpage' :
-			echo "masuk";
 			bookpage();
+			break;
+		case 'loan' :
+			loan();
 			break;
 		default:
 			# code...
@@ -67,20 +69,15 @@
 		$mysql_username = 'root';
 		$mysql_password = '';
 		$mysql_database = 'dump';
-
 		$conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password,$mysql_database);
-
 		return $conn;
-
 	}
 
 	function import_database(){
 		$conn = connectDB();
-
 		$filename = 'personal_library.sql';
 		$sql = "CREATE DATABASE \"dump\"";
 		mysqli_query($conn, $sql);
-
 		$templine = '';
 		$lines = file($filename);
 		foreach ($lines as $line)
@@ -101,36 +98,10 @@
 		}
 		return false;
 	}
-
-	function print_database(){
-		$conn = connectDB();
-		//Select data
-		$sql = "SELECT * FROM book";
-		/*SELECT "atribut 1,...,atribut n" 
-		FROM "nama table"*/
-
-		$result = mysqli_query($conn, $sql);
-		if (mysqli_num_rows($result) > 0) {
-		    // output data of each row
-		    while($row = mysqli_fetch_assoc($result)) {
-		    	foreach($row as $key=>$value){
-		    		echo "$key: " . $value . "</br>";
-		    	}
-		    	echo "</br>";
-		    }
-			echo "</br>";
-		} else {
-		    echo "0 results";
-			echo "</br></br>";
-		}
-	}
-
+	
 	function cek_user($user,$pass){
 		$conn = connectDB();
-
 		$sql = "SELECT * FROM user";
-		mysqli_query($conn, $sql);
-
 		$result = mysqli_query($conn, $sql);
 		//echo $result;
 		if (mysqli_num_rows($result) > 0) {
@@ -159,23 +130,95 @@
 		header("Location:halaman_buku.php?id=$idbuku");
 	}
 
+	function searchName($id){
+		$conn = connectDB();
+		$sql = "SELECT * FROM user where user_id=$id";
+		$result = mysqli_query($conn, $sql);
+		//echo $result;
+		if (mysqli_num_rows($result) > 0) {
+		    // output data of each row
+		    while($row = mysqli_fetch_assoc($result)) {
+		        if($id == $row['user_id']){
+		        	return $row['username'];
+		        }
+		    }
+		} else {
+		    return false;
+		}
+	}
+
+	function loan(){
+		$user_id = $_SESSION['id'];
+		$thisid = $_GET['idbuku'];
+		$conn = connectDB();
+		$sql = "INSERT INTO loan (book_id, user_id) VALUES ('$thisid', '$user_id')";
+		//echo $result;
+		if (mysqli_query($conn, $sql)) {
+			$sql = "SELECT * FROM book WHERE book_id=$thisid";
+			$result = mysqli_query($conn, $sql);
+			//echo $result;
+			while($row = mysqli_fetch_row($result)) {
+				if (mysqli_num_rows($result) > 0) {
+			    	$idbuku = $row[0];
+			    	$stok = $row[6];
+			    	setStock($idbuku,$stok);
+			    }
+			}
+		} else {
+		    return false;
+		}
+	}
+
+	function setStock($idbuku,$stok){
+		$stock = $stok-1;
+		$conn = connectDB();
+		$sql = "UPDATE book SET quantity='$stock' WHERE book_id=$idbuku";
+		mysqli_query($conn, $sql);
+		header("Location:halaman_buku.php?id=$idbuku");
+	}
+
+	function returnBook(){
+
+	}
 	function generateReview(){
-		
+		$conn = connectDB();
+		$thisid= $_GET['id'];
+		$sql = "SELECT * FROM review";
+		$result = mysqli_query($conn, $sql);
+		//echo $result;
+		while($row = mysqli_fetch_row($result)) {
+			if (mysqli_num_rows($result) > 0) {
+		    	$review_id = $row[0];
+		    	$book_id = $row[1];
+		    	$user_id = $row[2];
+		    	$date = $row[3];
+		    	$content = $row[4];
+		    	$name = searchName($user_id);
+
+		    	if($book_id == $thisid){
+		    		echo"
+		    		<div class=\"panel\">
+						<div id=\"user\">
+							$name
+						</div>
+						<div id=\"paragraph\">
+							$content
+						</div>
+						<div id=\"time\">
+							$date
+						</div>
+					</div>";
+		    	}
+			} else {
+			    return false;
+			}
+		}
 	}
 
 	function generateBookPage(){
-		$mysql_host = 'localhost';
-		$mysql_username = 'root';
-		$mysql_password = '';
-		$mysql_database = 'dump';
-
 		$conn = connectDB();
-
 		$thisid = $_GET['id'];
-
 		$sql = "SELECT * FROM book WHERE book_id=$thisid";
-		mysqli_query($conn, $sql);
-
 		$result = mysqli_query($conn, $sql);
 		//echo $result;
 		while($row = mysqli_fetch_row($result)) {
@@ -222,14 +265,16 @@
 								</p>
 								<p class=\"col-md-8 col-sm-8\">$stok</p>
 							</div>
-					</div>
-					<div id=\"button\" class=\"panel\">
-						<form action=\"service.php\" class=\"form\" method=\"get\">
-							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
-							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"loan\">Pinjam Buku</button>
-							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"return\">Kembalikan buku</button>
-						</form>
 					</div>";
+					if(isset($_SESSION['login']) && $_SESSION['login']){
+						echo " <div id=\"button\" class=\"panel\">
+								<form action=\"service.php\" class=\"form\" method=\"get\">
+									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
+									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"loan\">Pinjam Buku</button>
+									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"return\">Kembalikan buku</button>
+								</form>
+							</div>";
+					}
 			} else {
 			    return false;
 			}
@@ -237,16 +282,8 @@
 	}
 
 	function generateHome(){
-		$mysql_host = 'localhost';
-		$mysql_username = 'root';
-		$mysql_password = '';
-		$mysql_database = 'dump';
-
 		$conn = connectDB();
-
 		$sql = "SELECT * FROM book";
-		mysqli_query($conn, $sql);
-
 		$result = mysqli_query($conn, $sql);
 		//echo $result;
 		if (mysqli_num_rows($result) > 0) {
@@ -274,82 +311,6 @@
 				if($idbuku%2==0){
 					echo"</div>";
 				}
-		    }
-		} else {
-		    return false;
-		}
-	}
-
-	function generateBook(){
-		$mysql_host = 'localhost';
-		$mysql_username = 'root';
-		$mysql_password = '';
-		$mysql_database = 'dump';
-
-		$conn = connectDB();
-
-		$sql = "SELECT * FROM book";
-		mysqli_query($conn, $sql);
-
-		$result = mysqli_query($conn, $sql);
-		//echo $result;
-		if (mysqli_num_rows($result) > 0) {
-		    // output data of each row
-		    while($row = mysqli_fetch_row($result)) {
-		    	$idbuku = $row[0];
-		    	$gambar = $row[1];
-		    	$judul = $row[2];
-		    	$pengarang = $row[3];
-		    	$penerbit = $row[4];
-		    	$deskripsi = $row[5];
-		    	$stok = $row[6];
-		    	echo "<li class=\"col-md-12 col-sm-12 list-group-item\">
-					<div class=\"text-justify\">
-						<div id=\"gambar buku\" class=\"col-md-4 col-sm-4\">
-							<img src=\"$idbuku.jpg\" class=\"img-responsive\">
-						</div>
-						<div id=\"identitas buku\" class=\"col-md-12 col-sm-12\">
-							<div id=\"title\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Nama Buku
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
-								<p class=\"col-md-8 col-sm-8\">$judul</p>
-							</div>
-							<div id=\"author\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Pengarang
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
-								<p class=\"col-md-8 col-sm-8\">$pengarang</p>
-							</div>
-							<div id=\"publisher\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Penerbit
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
-								<p class=\"col-md-8 col-sm-8\">$penerbit</p>
-							</div>
-							<div id=\"description\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Deskripsi
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
-								<p class=\"col-md-8 col-sm-8\">$deskripsi</p>
-							</div>
-							<div id=\"quantity\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Stok
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
-								<p class=\"col-md-8 col-sm-8\">$stok</p>
-							</div>
-							<div id=\"button\" class=\"panel col-md-12 col-sm-12\">
-								<form action=\"service.php\" class=\"form\" method=\"get\">
-									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
-									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Halaman Buku</button>
-									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"loan\">Pinjam Buku</button>
-									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"return\">Kembalikan buku</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</li>";
 		    }
 		} else {
 		    return false;
