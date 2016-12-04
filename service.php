@@ -59,6 +59,11 @@
 		case 'loan' :
 			loan();
 			break;
+		
+		case 'return' :
+			returnBook();
+			break;
+		
 		default:
 			# code...
 			break;
@@ -315,5 +320,64 @@
 		} else {
 		    return false;
 		}
+	}
+
+	function showLoan(){
+		$conn = connectDB();
+		$sql = "SELECT * FROM loan";
+		$result = mysqli_query($conn, $sql);
+		$books = array();
+		if(isset($_SESSION['login']) && $_SESSION['login']){
+			$user_id = $_SESSION['id'];
+			$user_name = $_SESSION['username'];
+			//echo $user_id;
+			//echo $user_name;
+			//echo '<br>';
+			if (mysqli_num_rows($result) > 0) {
+				while($row = mysqli_fetch_row($result)) {
+		    		$idLoan = $row[0];
+		    		$idBook = $row[1];
+		    		$idUser = $row[2];
+		    		if($idUser == $user_id){
+		    			if(array_key_exists($idBook, $books)){
+		    				$books[$idBook] += 1;
+		    				//echo $books[$idBook];
+		    				//echo '<br>';
+		    			} else {
+		    				$books[$idBook] = 1;
+		    				//echo $books[$idBook];
+		    				//echo '<br>';
+		    			}
+		    			//echo $idBook;
+		    			//showBook($idBook);
+		    			//echo '<br>';
+		    		}
+		    	}
+			}
+			foreach ($books as $key => $value) {
+				$bookName = showBook($key);
+				echo 
+				'<tr>
+					<td>' . $bookName . '</td>
+					<td>' . $value . '</td>
+					<td>  </td>
+				</tr>';
+			}
+		}
+	}
+
+	function showBook($bookId){
+		$conn = connectDB();
+		$sql = "SELECT * FROM book";
+		$result = mysqli_query($conn, $sql);
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_row($result)) {
+				$idbuku = $row[0];
+		    	$judul = $row[2];
+		    	if($bookId == $idbuku){
+		    		return $judul;
+		    	}		    	
+		    }	
+		}		
 	}
 ?>

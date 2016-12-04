@@ -108,21 +108,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><a href="#">test</a></td>
-								<td>test</td>
-								<td>test</td>
-							</tr>
-							<tr>
-								<td><a href="#">test</a></td>
-								<td>test</td>
-								<td>test</td>
-							</tr>
-							<tr>
-								<td><a href="#">test</a></td>
-								<td>test</td>
-								<td>test</td>
-							</tr>
+							<?php
+								showLoan();
+							?>
+							
 						</tbody>
 					</table>
 				</div>
