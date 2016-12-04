@@ -68,7 +68,7 @@
 			</nav>
 		</div>
 		<div class="container">
-			<div id="book" class="text-center">
+			<div id="book-container" class="text-justify">
 				<?php 
 					generateHome();
 				?>

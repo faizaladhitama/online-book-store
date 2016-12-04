@@ -10,6 +10,8 @@
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="javascript.js"></script>
 	</head>
 	<body>
 		<div id="header" class="container-fluid page-header">
@@ -62,7 +64,7 @@
 		</div>
 		<div class="container">
 			<div id="layout" class="row">
-				<div id="buku" class="col-md-9">
+				<div id="buku" class="col-md-9 text-justify row">
 					<?php 
 						generateBookPage();
 					?>
@@ -71,20 +73,29 @@
 					Buku bla bla bla
 				</div>
 			</div>
-			<div id="review">
-				<div id="box" class="panel">
-					Kotak review
+			<div id="review" class="row">
+				<div id="box">
+					<h4>Kolom Review</h4>
 				</div>
 				<?php 
-					generateReview();
+					if(!generateReview()){
+						echo "<h6>Tidak ada review</h6>";
+					}
+					if(isset($_SESSION['login']) && $_SESSION['login']){
+						$thisid = $_GET['id'];
+						echo"
+						<div>
+							<div id=\"review\">
+								<form>
+									<div>
+										<textarea rows=\"3\" cols=\"50\" id=\"review-box\" placeholder=\"Tulis disini\"></textarea>
+									</div>
+								</form><input type=\"hidden\" id=\"hiddenid\" value=\"$thisid\"/>
+								<button id=\"review-btn\">Submit Review</button>
+							</div>
+						</div>";
+					}
 				?>
-				<div class="panel">
-					<div id="box">
-						<form>
-							<textarea placeholder="Tulis disini"></textarea>
-						</form>
-					</div>
-				</div>
 			</div>
 		</div>
 	</body>

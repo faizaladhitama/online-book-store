@@ -23,7 +23,7 @@
 		?>
 		</div>
 		<h2>Login Form</h2>
-		<form class="form-horizontal" id="loginForm" action="service.php" method="POST">
+		<form class="form-horizontal" id="loginForm" name="loginForm" action="service.php" method="POST">
 			<div class="form-group">
 				<label class="control-label col-sm-2">Username : </label>
 				<div class="col-sm-6">

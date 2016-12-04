@@ -1,7 +1,9 @@
 $(document).ready(function(){
+	$("#review-btn").on("click", createReview);
+
 	$('#loginForm').submit(function () {
-	 loginClientCheck();
-	 return false;
+		loginClientCheck();
+		return false;
 	});
 	
 	var loginClientCheck = function(){
@@ -31,22 +33,26 @@ $(document).ready(function(){
 		}
 
 		if(!error){
-			loginServerCheck(username,password);
+			loginServerCheck();
 		}
 		else{
 			return false;
 		}
 	}
 
-	var loginServerCheck = function(username,password){
-		window.onload();
+	var loginServerCheck = function(){
+		document.getElementById("loginForm").submit();
 	}
 
-	window.onload = function() {
-	    document.myform.action = get_action();
-	}
-
-	function get_action() {
-	    return form_action;
-	}
+	function createReview(){
+		var val = document.getElementById("review-box").value;	
+		var thisid = document.getElementById("hiddenid").value;
+		$.ajax ({
+			type: "GET",
+			url:"service.php",
+			data:{command:"submit_review",value:val,id:thisid},
+		}).done(function(data){
+			location.reload();
+		});
+	} 
 });

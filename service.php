@@ -6,7 +6,7 @@
 		$command = $_POST['command']; 
 	}
 	else if(!isset($_SESSION['import_database'])){
-		$command = "import_database";
+		$command = "import_database";	
 		$_SESSION['import_database'] = true;
 	}
 	else if(isset($_GET['command'])){
@@ -14,8 +14,8 @@
 	}
 
 	if($_SERVER['PHP_SELF'] == "/a_12/service.php"){
-		if($_SERVER['REQUEST_METHOD'] == "POST" || ($_SERVER['REQUEST_METHOD'] =="GET" && count($_GET) > 0)){
-			
+		if($_SERVER['REQUEST_METHOD'] == "POST" || ($_SERVER['REQUEST_METHOD'] =="GET" && count($_GET) > 0))
+		{
 		}
 		else{
 			header('HTTP/1.0 404 Not Found');
@@ -48,7 +48,7 @@
 			}
 			break;
 		case 'submit_review':
-			# code...
+			create_review();
 			break;
 		case 'logout' :
 			logout();
@@ -59,6 +59,9 @@
 		case 'loan' :
 			loan();
 			break;
+		case 'return' :
+			returnBook();
+			break;
 		default:
 			# code...
 			break;
@@ -68,34 +71,37 @@
 		$mysql_host = 'localhost';
 		$mysql_username = 'root';
 		$mysql_password = '';
-		$mysql_database = 'dump';
-		$conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password,$mysql_database);
+		$mysql_database = 'tugasakhirPPW';
+		$conn = mysqli_connect($mysql_host, $mysql_username,$mysql_password);
+		import_database();
+		mysqli_select_db($conn,$mysql_database);
 		return $conn;
 	}
 
 	function import_database(){
-		$conn = connectDB();
+		$mysql_host = 'localhost';
+		$mysql_username = 'root';
+		$mysql_password = '';
+		$conn = mysqli_connect($mysql_host, $mysql_username,$mysql_password);
 		$filename = 'personal_library.sql';
-		$sql = "CREATE DATABASE \"dump\"";
-		mysqli_query($conn, $sql);
-		$templine = '';
-		$lines = file($filename);
-		foreach ($lines as $line)
-		{
-			// Skip it if it's a comment
-			if (substr($line, 0, 2) == '--' || $line == '')
-			    continue;
-
-			// Add this line to the current segment
-			$templine .= $line;
-			// If it has a semicolon at the end, it's the end of the query
-			if (substr(trim($line), -1, 1) == ';')
+		$sql = "CREATE DATABASE tugasakhirPPW";
+		if(mysqli_query($conn, $sql)){
+			mysqli_select_db($conn,"tugasakhirPPW");
+			$templine = '';
+			$lines = file($filename);
+			foreach ($lines as $line)
 			{
-			    // Perform the query
-			    mysqli_query($conn,$templine);
-			    $templine = '';
+				if (substr($line, 0, 2) == '--' || $line == '')
+				    continue;
+				$templine .= $line;
+				if (substr(trim($line), -1, 1) == ';')
+				{
+				    mysqli_query($conn,$templine);
+				    $templine = '';
+				}
 			}
-		}
+			return true;
+		}	
 		return false;
 	}
 	
@@ -147,6 +153,17 @@
 		}
 	}
 
+	function create_review(){
+		$thisid = $_GET['id'];
+		$content = $_GET['value'];
+		$today = date("y-m-d");
+		$user_id = $_SESSION['id'];
+		$conn = connectDB();
+		$date ="date";
+		$sql = "INSERT INTO review (book_id,user_id,$date,content) VALUES ('$thisid', '$user_id','$today','$content')";
+		mysqli_query($conn, $sql);
+	}
+
 	function loan(){
 		$user_id = $_SESSION['id'];
 		$thisid = $_GET['idbuku'];
@@ -157,20 +174,27 @@
 			$sql = "SELECT * FROM book WHERE book_id=$thisid";
 			$result = mysqli_query($conn, $sql);
 			//echo $result;
-			while($row = mysqli_fetch_row($result)) {
-				if (mysqli_num_rows($result) > 0) {
+
+			if (mysqli_num_rows($result) > 0) {
+				while($row = mysqli_fetch_row($result)) {
 			    	$idbuku = $row[0];
 			    	$stok = $row[6];
-			    	setStock($idbuku,$stok);
+			    	setStock($idbuku,$stok,"loan");
 			    }
+			} else {
+		    	return false;
 			}
-		} else {
-		    return false;
 		}
 	}
 
-	function setStock($idbuku,$stok){
-		$stock = $stok-1;
+	function setStock($idbuku,$stok,$status){
+		$stock = $stok;
+		if($status == "loan"){
+			$stock=$stok-1;
+		}
+		else if($status == "return"){
+			$stock=$stok+1;
+		}
 		$conn = connectDB();
 		$sql = "UPDATE book SET quantity='$stock' WHERE book_id=$idbuku";
 		mysqli_query($conn, $sql);
@@ -178,16 +202,89 @@
 	}
 
 	function returnBook(){
+		$thisid = $_GET['idbuku'];
+		$conn = connectDB();
+		$loan_id = searchLoanedBook($thisid);
+		$sql = "SELECT * FROM book WHERE book_id=$thisid";
+		$result = mysqli_query($conn, $sql);
+		//echo $result;
 
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_row($result)) {
+		    	$idbuku = $row[0];
+		    	$stok = $row[6];
+		    	setStock($idbuku,$stok,"return");
+		    }
+		}
+	}
+
+	function bookIsEmpty(){
+		$thisid = $_GET['id'];
+		$conn = connectDB();
+		$sql = "SELECT * FROM book WHERE book_id=$thisid";
+		$result = mysqli_query($conn, $sql);
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_row($result)) {
+		    	$quantity = $row[6];
+		    	if($quantity > 0){
+		    		return false;
+		    	}
+	        }
+	        return true;
+		}
+		return true;
+	}
+
+	function loanIsEmpty(){
+		$thisid = $_GET['id'];
+		$userid = $_SESSION['id'];
+		$conn = connectDB();
+		$sql = "SELECT * FROM loan";
+		$result = mysqli_query($conn, $sql);
+		//echo $result;
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_row($result)) {
+		    	$book_id = $row[1];
+		    	$user_id = $row[2];
+		    	if($userid == $user_id && $thisid == $book_id){
+		    		return false;
+		    	}
+	        }
+		}
+		return true;	
+	}
+
+	function searchLoanedBook($bookid){
+		$conn = connectDB();
+		$sql = "SELECT * FROM loan";
+		$result = mysqli_query($conn, $sql);
+		//echo $result;
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_row($result)) {
+		    	$loan_id = $row[0];
+		    	$book_id = $row[1];
+		    	$user_id = $row[2];
+		    	if($book_id == $bookid){
+		    		$sql = "DELETE FROM loan WHERE loan_id=$loan_id";
+		    		mysqli_query($conn, $sql);
+		    		return $loan_id;
+		    	}
+			} 
+		}
+		else {
+		    return false;
+		}
 	}
 	function generateReview(){
 		$conn = connectDB();
 		$thisid= $_GET['id'];
-		$sql = "SELECT * FROM review";
+		$sql = "SELECT * FROM review WHERE book_id=$thisid";
 		$result = mysqli_query($conn, $sql);
 		//echo $result;
-		while($row = mysqli_fetch_row($result)) {
-			if (mysqli_num_rows($result) > 0) {
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_row($result)) {
 		    	$review_id = $row[0];
 		    	$book_id = $row[1];
 		    	$user_id = $row[2];
@@ -209,9 +306,10 @@
 						</div>
 					</div>";
 		    	}
-			} else {
-			    return false;
-			}
+			} 
+			return true;
+		}else{
+			return false;
 		}
 	}
 
@@ -221,8 +319,9 @@
 		$sql = "SELECT * FROM book WHERE book_id=$thisid";
 		$result = mysqli_query($conn, $sql);
 		//echo $result;
-		while($row = mysqli_fetch_row($result)) {
-			if (mysqli_num_rows($result) > 0) {
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_row($result)) {
 		    	$idbuku = $row[0];
 		    	$gambar = $row[1];
 		    	$judul = $row[2];
@@ -231,10 +330,10 @@
 		    	$deskripsi = $row[5];
 		    	$stok = $row[6];
 
-		    	echo "<div id=\"gambar\" class=\"panel\">
+		    	echo "<div id=\"gambar\" class=\"panel row\">
 						<img src=\"$idbuku.jpg\" class=\"img-responsive\">
 					</div>
-					<div id=\"identitas\" class=\"panel\">
+					<div id=\"identitas\" class=\"panel row\">
 						<div id=\"title\" class=\"panel\">
 								<p class=\"col-md-3 col-sm-3\">Nama Buku
 									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
@@ -267,17 +366,20 @@
 							</div>
 					</div>";
 					if(isset($_SESSION['login']) && $_SESSION['login']){
-						echo " <div id=\"button\" class=\"panel\">
+						echo "<div id=\"button\" class=\"panel row\">
 								<form action=\"service.php\" class=\"form\" method=\"get\">
-									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
-									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"loan\">Pinjam Buku</button>
-									<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"return\">Kembalikan buku</button>
-								</form>
-							</div>";
+									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>";
+						if(!bookIsEmpty()){
+							echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"loan\">Pinjam Buku</button><div class=\"col-md-1\"></div>";	
+						}
+						if(!loanIsEmpty()){
+							echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"return\">Kembalikan buku</button>";
+						}
+						echo"</form></div>";
 					}
-			} else {
-			    return false;
 			}
+		} else {
+			return false;
 		}
 	}
 
