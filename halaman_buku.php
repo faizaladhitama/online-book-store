@@ -81,7 +81,7 @@
 					if(!generateReview()){
 						echo "<h6>Tidak ada review</h6>";
 					}
-					if(isset($_SESSION['login']) && $_SESSION['login']){
+					if(isset($_SESSION['login']) && $_SESSION['login'] && $_SESSION['role'] == "user"){
 						$thisid = $_GET['id'];
 						echo"
 						<div>

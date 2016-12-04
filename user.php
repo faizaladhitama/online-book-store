@@ -61,41 +61,6 @@
 			</nav>
 		</div>
 		<div class="container">
-			<div id="history">
-				<div id="table" class="table-responsive">
-					<table class="table table-bordered">
-						<caption>Table Waktu Peminjaman</caption>
-						<thead>
-							<tr>
-								<th class="col-md-6 text-center">Nama buku</th>
-								<th class="col-md-2 text-center">Waktu Peminjaman</th>
-								<th class="col-md-2 text-center">Deadline Peminjaman</th>
-								<th class="col-md-2 text-center">Denda</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><a href="#">test</a></td>
-								<td>test</td>
-								<td>test</td>
-								<td>test</td>
-							</tr>
-							<tr>
-								<td><a href="#">test</a></td>
-								<td>test</td>
-								<td>test</td>
-								<td>test</td>
-							</tr>
-							<tr>
-								<td><a href="#">test</a></td>
-								<td>test</td>
-								<td>test</td>
-								<td>test</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 			<div id="total peminjaman">
 				<div id="table" class="table-responsive">
 					<table class="table table-bordered">
@@ -104,7 +69,7 @@
 							<tr>
 								<th class="col-md-6 text-center">Nama buku</th>
 								<th class="col-md-3 text-center">Jumlah buku</th>
-								<th class="col-md-3 text-center">Mengembalikan Buku</th>
+								<th class="col-md-3 text-center">Button pengembalian</th>
 							</tr>
 						</thead>
 						<tbody>

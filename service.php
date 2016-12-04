@@ -59,17 +59,15 @@
 		case 'loan' :
 			loan();
 			break;
-<<<<<<< HEAD
-		case 'return' :
-			returnBook();
-			break;
-=======
-		
+
 		case 'return' :
 			returnBook();
 			break;
 		
->>>>>>> e3ed88ab8dc95b18dc18287365838012c09b7665
+		case 'return' :
+			returnBook();
+			break;
+		
 		default:
 			# code...
 			break;
@@ -377,11 +375,15 @@
 						echo "<div id=\"button\" class=\"panel row\">
 								<form action=\"service.php\" class=\"form\" method=\"get\">
 									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>";
-						if(!bookIsEmpty()){
+						if(!bookIsEmpty() && $_SESSION['role'] == "user"){
 							echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"loan\">Pinjam Buku</button><div class=\"col-md-1\"></div>";	
 						}
-						if(!loanIsEmpty()){
+						if(!loanIsEmpty() && $_SESSION['role'] == "user"){
 							echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"return\">Kembalikan buku</button>";
+						}
+
+						if($_SESSION['role'] == "admin"){
+							echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"add_stock\">Tambah Stok</button><div class=\"col-md-1\"></div>";	
 						}
 						echo"</form></div>";
 					}
