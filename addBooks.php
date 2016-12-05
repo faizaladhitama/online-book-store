@@ -64,9 +64,52 @@
 			</nav>
 		</div>
 		<div class="container">
-			<div id="book-container" class="text-justify">
-				<form>
-					
+			<div id="book-container">
+				<div class="text-center panel">
+					<h2>Input Database</h2>
+				</div>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="image" class="control-label col-sm-2">Image :</label>
+						<div class="col-sm-8">
+							<input type="file" name="image"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="title" class="control-label col-sm-2">Title :</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="title"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="author" class="control-label col-sm-2">Author :</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="author"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="publisher" class="control-label col-sm-2">Publisher :</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="publisher">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description" class="control-label col-sm-2">Description :</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="description">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="quantity" class="control-label col-sm-2">Quantity :</label>
+						<div class="col-sm-8">
+							<input type="number" class="form-control" name="quantity"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-1 col-sm-8">
+							<button type="submit" class="btn btn-default">Submit</button>
+    					</div>
+  					</div>
 				</form>
 			</div>
 		</div>

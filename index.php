@@ -30,9 +30,9 @@
 			        <?php 
 			        	if(isset($_SESSION['login']) && $_SESSION['login']){
 			        		if($_SESSION['role'] == 'admin'){
-			        			echo "<li><a href=\"addBooks.php\">Tambah Buku</a></li>";
+			        			echo "<li><a href=\"addBooks.php\">Halaman Admin</a></li>";
 			        		} else {
-			        			echo "<li><a href=\"user.php\">Halaman Peminjaman</a></li>";
+			        			echo "<li><a href=\"user.php\">Halaman User</a></li>";
 			        		}
 			        	}
 			        ?>

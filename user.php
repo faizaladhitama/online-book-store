@@ -32,7 +32,6 @@
 			            <li><a href="http://google.com/" target="_blank">Google</a></li>
 			          </ul>
 			         </li>
-			        <li><a href="#">Ketentuan Peminjaman</a></li>
 			        <li><a href="#">About Us</a></li>
 			      </ul>
 			      <ul class="nav navbar-nav navbar-right">
