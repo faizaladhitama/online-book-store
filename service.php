@@ -207,10 +207,10 @@
 		$thisid = $_GET['idbuku'];
 		$conn = connectDB();
 		$loan_id = searchLoanedBook($thisid);
+		$sql = "DELETE FROM loan WHERE loan_id=$loan_id";
+		mysqli_query($conn, $sql);
 		$sql = "SELECT * FROM book WHERE book_id=$thisid";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
-
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_row($result)) {
 		    	$idbuku = $row[0];
@@ -372,10 +372,11 @@
 								<form action=\"service.php\" class=\"form\" method=\"get\">
 									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>";
 						if(!bookIsEmpty() && $_SESSION['role'] == "user"){
-							echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"loan\">Pinjam Buku</button><div class=\"col-md-1\"></div>";	
-						}
-						if(!loanIsEmpty() && $_SESSION['role'] == "user"){
-							echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"return\">Kembalikan buku</button>";
+							if(!loanIsEmpty()){
+								echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"return\">Kembalikan buku</button>";
+							}else{
+								echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"loan\">Pinjam Buku</button><div class=\"col-md-1\"></div>";	
+							}
 						}
 
 						if($_SESSION['role'] == "admin"){
