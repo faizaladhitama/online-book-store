@@ -29,9 +29,10 @@
 			        <li class="active"><a href="index.php">Home</a></li>
 			        <?php 
 			        	if(isset($_SESSION['login']) && $_SESSION['login']){
-			        		echo "<li><a href=\"user.php\">Halaman Peminjaman</a></li>";
 			        		if($_SESSION['role'] == 'admin'){
 			        			echo "<li><a href=\"addBooks.php\">Tambah Buku</a></li>";
+			        		} else {
+			        			echo "<li><a href=\"user.php\">Halaman Peminjaman</a></li>";
 			        		}
 			        	}
 			        ?>
