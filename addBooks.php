@@ -65,48 +65,55 @@
 		</div>
 		<div class="container">
 			<div id="book-container">
+				<?php
+					if(isset($_SESSION['warning'])){
+						echo "<script>alert(\"File yang anda masukkan tidak sesuai format\")</script>"; 
+						unset($_SESSION['warning']);
+					}
+				?>
 				<div class="text-center panel">
 					<h2>Input Database</h2>
 				</div>
-				<form class="form-horizontal">
+				<form class="form-horizontal" method="POST" action="service.php" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="image" class="control-label col-sm-2">Image :</label>
 						<div class="col-sm-8">
-							<input type="file" name="image"/>
+							<input type="file" name="image" id="image"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="title" class="control-label col-sm-2">Title :</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="title"/>
+							<input type="text" class="form-control" name="title" required/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="author" class="control-label col-sm-2">Author :</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="author"/>
+							<input type="text" class="form-control" name="author" required/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="publisher" class="control-label col-sm-2">Publisher :</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="publisher">
+							<input type="text" class="form-control" name="publisher" required/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="description" class="control-label col-sm-2">Description :</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="description">
+							<input type="text" class="form-control" name="description" required/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="quantity" class="control-label col-sm-2">Quantity :</label>
 						<div class="col-sm-8">
-							<input type="number" class="form-control" name="quantity"/>
+							<input type="number" class="form-control" name="quantity" required/>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-1 col-sm-8">
+							<input type="hidden" name="command" value="upload"/>
 							<button type="submit" class="btn btn-default">Submit</button>
     					</div>
   					</div>

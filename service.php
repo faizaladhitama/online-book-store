@@ -29,7 +29,6 @@
 			import_database();
 			break;
 		case 'login':
-			# code...
 			if(isset($_SESSION['login']) && $_SESSION['login']){
 				header("Location: index.php");
 			}
@@ -59,13 +58,13 @@
 		case 'loan' :
 			loan();
 			break;
-		
 		case 'return' :
 			returnBook();
 			break;
-		
+		case 'upload' :
+			uploadBook();
+			break;
 		default:
-			# code...
 			break;
 	}
 
@@ -128,6 +127,58 @@
 		}
 	}
 
+	function uploadBook(){
+		$image = $_FILES['image'];
+		$file_name = $image['name'];
+		$file_size = $image['size'];
+		$file_tmp = $image['tmp_name'];
+		$file_type = $image['type'];
+		$file_ext = pathinfo($file_name,PATHINFO_EXTENSION);
+
+		$new_name = lastNumber() ."." .$file_ext;
+		$title = $_POST['title'];
+		$author = $_POST['author'];
+		$publisher = $_POST['publisher'];
+		$description = $_POST['description'];
+		$quantity = $_POST['quantity'];
+
+		$conn = connectDB();
+
+		if(!searchBook($title)){
+			if(($file_ext=="png" || $file_ext=="jpg") && $file_size <= 4000000){
+				move_uploaded_file($file_tmp,("./uploads/".$new_name));
+				$sql = "INSERT INTO book (img_path,title,author,publisher,description,quantity) VALUES ('$new_name', '$title','$author','$publisher','$description','$quantity')";
+				mysqli_query($conn, $sql);
+				header("Location:index.php");
+			}
+			else{
+				$_SESSION['warning'] = true;
+				header("Location:addBooks.php");
+			}
+		}else{
+			$thisbook = searchBook($title)[0];
+			$stok = searchBook($title)[1];
+			setStock($thisbook,$stok,$quantity);
+		}
+	}
+
+	function lastNumber(){
+		$lastid = 0;
+		
+		$conn = connectDB();
+		$sql = "SELECT * FROM book";
+
+		$result = mysqli_query($conn, $sql);
+		if (mysqli_num_rows($result) > 0) {
+		    while($row = mysqli_fetch_assoc($result)) {
+		    	$lastid=$lastid+1;
+		    }
+		}
+
+		$lastid=$lastid+1;
+		return $lastid;
+	}
+
 	function logout(){
 		session_destroy();
 		header("Location:index.php");
@@ -148,6 +199,22 @@
 		    while($row = mysqli_fetch_assoc($result)) {
 		        if($id == $row['user_id']){
 		        	return $row['username'];
+		        }
+		    }
+		} else {
+		    return false;
+		}
+	}
+
+	function searchBook($title){
+		$conn = connectDB();
+		$sql = "SELECT * FROM book";
+		$result = mysqli_query($conn, $sql);
+		if (mysqli_num_rows($result) > 0) {
+		    while($row = mysqli_fetch_assoc($result)) {
+		        if($title == $row['title']){
+		        	$array = [$row['book_id'],$row['quantity']];
+		        	return $array;
 		        }
 		    }
 		} else {
@@ -181,7 +248,7 @@
 				while($row = mysqli_fetch_row($result)) {
 			    	$idbuku = $row[0];
 			    	$stok = $row[6];
-			    	setStock($idbuku,$stok,"loan");
+			    	setStock($idbuku,$stok,-1);
 			    }
 			} else {
 		    	return false;
@@ -189,14 +256,8 @@
 		}
 	}
 
-	function setStock($idbuku,$stok,$status){
-		$stock = $stok;
-		if($status == "loan"){
-			$stock=$stok-1;
-		}
-		else if($status == "return"){
-			$stock=$stok+1;
-		}
+	function setStock($idbuku,$stok,$quantity){
+		$stock=$stok+$quantity;
 		$conn = connectDB();
 		$sql = "UPDATE book SET quantity='$stock' WHERE book_id=$idbuku";
 		mysqli_query($conn, $sql);
@@ -215,7 +276,7 @@
 			while($row = mysqli_fetch_row($result)) {
 		    	$idbuku = $row[0];
 		    	$stok = $row[6];
-		    	setStock($idbuku,$stok,"return");
+		    	setStock($idbuku,$stok,1);
 		    }
 		}
 	}
@@ -333,7 +394,7 @@
 		    	$stok = $row[6];
 
 		    	echo "<div id=\"gambar\" class=\"panel row\">
-						<img src=\"$idbuku.jpg\" class=\"img-responsive\">
+						<img src=\"uploads/$idbuku.jpg\" class=\"img-responsive\">
 					</div>
 					<div id=\"identitas\" class=\"panel row\">
 						<div id=\"title\" class=\"panel\">
@@ -410,7 +471,7 @@
 		    		echo "<div class=\"row\">";
 		    	}
 		    	echo "<div class=\"col-md-6 panel\">
-						<img src=\"$idbuku.jpg\" class=\"img-responsive\"/>
+						<img src=\"uploads/$idbuku.jpg\" class=\"img-responsive\"/>
 						<p>$judul</p>
 						<form action=\"service.php\" class=\"form\" method=\"get\">
 							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
@@ -463,7 +524,7 @@
 		    	
 		    	echo "<div class=\"row\">";		    	
 		    	echo "<div class=\"col-md-6 panel\">
-						<img src=\"$idbuku.jpg\" class=\"img-responsive\"/>
+						<img src=\"uploads/$idbuku.jpg\" class=\"img-responsive\"/>
 						<p>$judul</p>
 						<form action=\"service.php\" class=\"form\" method=\"get\">
 							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
