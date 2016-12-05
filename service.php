@@ -59,10 +59,6 @@
 		case 'loan' :
 			loan();
 			break;
-
-		case 'return' :
-			returnBook();
-			break;
 		
 		case 'return' :
 			returnBook();
@@ -417,7 +413,7 @@
 						<p>$judul</p>
 						<form action=\"service.php\" class=\"form\" method=\"get\">
 							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
-							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Halaman Buku</button>
+							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Deskripsi Buku</button>
 						</form>
 					</div>";
 				if($idbuku%2==0){
@@ -436,55 +432,46 @@
 		$books = array();
 		if(isset($_SESSION['login']) && $_SESSION['login']){
 			$user_id = $_SESSION['id'];
-			$user_name = $_SESSION['username'];
-			//echo $user_id;
-			//echo $user_name;
-			//echo '<br>';
 			if (mysqli_num_rows($result) > 0) {
 				while($row = mysqli_fetch_row($result)) {
 		    		$idLoan = $row[0];
 		    		$idBook = $row[1];
 		    		$idUser = $row[2];
 		    		if($idUser == $user_id){
-		    			if(array_key_exists($idBook, $books)){
-		    				$books[$idBook] += 1;
-		    				//echo $books[$idBook];
-		    				//echo '<br>';
-		    			} else {
-		    				$books[$idBook] = 1;
-		    				//echo $books[$idBook];
-		    				//echo '<br>';
-		    			}
-		    			//echo $idBook;
-		    			//showBook($idBook);
-		    			//echo '<br>';
+		    			showBook($idBook);
 		    		}
 		    	}
-			}
-			foreach ($books as $key => $value) {
-				$bookName = showBook($key);
-				echo 
-				'<tr>
-					<td>' . $bookName . '</td>
-					<td>' . $value . '</td>
-					<td>  </td>
-				</tr>';
 			}
 		}
 	}
 
 	function showBook($bookId){
 		$conn = connectDB();
-		$sql = "SELECT * FROM book";
+		$sql = "SELECT * FROM book WHERE book_id = $bookId";
 		$result = mysqli_query($conn, $sql);
+		$deskripsiBuku = array();
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_row($result)) {
 				$idbuku = $row[0];
+		    	$gambar = $row[1];
 		    	$judul = $row[2];
-		    	if($bookId == $idbuku){
-		    		return $judul;
-		    	}		    	
-		    }	
+		    	$pengarang = $row[3];
+		    	$penerbit = $row[4];
+		    	$deskripsi = $row[5];
+		    	$stok = $row[6];
+		    	
+		    	echo "<div class=\"row\">";		    	
+		    	echo "<div class=\"col-md-6 panel\">
+						<img src=\"$idbuku.jpg\" class=\"img-responsive\"/>
+						<p>$judul</p>
+						<form action=\"service.php\" class=\"form\" method=\"get\">
+							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
+							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Deskripsi Buku</button>
+						</form>
+					</div>";
+				echo"</div>";
+		    			    	
+		    }	 		
 		}		
 	}
 ?>

@@ -7,12 +7,13 @@
 
 <html>
 	<head>
-		<title>Halaman Profile</title>
+		<title>Halaman Peminjaman</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 		<div id="header" class="container-fluid page-header">
@@ -23,7 +24,7 @@
 			    <div class="collapse navbar-collapse" id="myNavbar">
 			      <ul class="nav navbar-nav">
 			        <li><a href="index.php">Home</a></li>
-			        <li class="active"><a href="user.php">Halaman Profile</a></li>
+			        <li class="active"><a href="user.php">Halaman Peminjaman</a></li>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Akses Cepat<span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			            <li><a href="http://www.w3schools.com/" target="_blank">W3 School</a></li>
@@ -62,24 +63,10 @@
 		</div>
 		<div class="container">
 			<div id="total peminjaman">
-				<div id="table" class="table-responsive">
-					<table class="table table-bordered">
-						<caption>Table Peminjaman</caption>
-						<thead>
-							<tr>
-								<th class="col-md-6 text-center">Nama buku</th>
-								<th class="col-md-3 text-center">Jumlah buku</th>
-								<th class="col-md-3 text-center">Button pengembalian</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								showLoan();
-							?>
-							
-						</tbody>
-					</table>
-				</div>
+				<?php
+					showLoan();
+				?>
+				
 			</div>
 		</div>
 	</body>

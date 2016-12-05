@@ -1,17 +1,15 @@
-<?php
-	include("service.php");
+<?php 
+	include("service.php") ;
 ?>
-
 <html>
 	<head>
-		<title>Halaman Buku</title>
+		<title>Perpustakaan Online</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="javascript.js"></script>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 		<div id="header" class="container-fluid page-header">
@@ -19,12 +17,22 @@
 		</div>
 		<div id="navbar">
 			<nav class="navbar navbar-inverse">
+				<div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>                        
+			      </button>
+			    </div>
 			    <div class="collapse navbar-collapse" id="myNavbar">
 			      <ul class="nav navbar-nav">
 			        <li><a href="index.php">Home</a></li>
 			        <?php 
 			        	if(isset($_SESSION['login']) && $_SESSION['login']){
 			        		echo "<li><a href=\"user.php\">Halaman Peminjaman</a></li>";
+			        		if($_SESSION['role'] == 'admin'){
+			        			echo "<li class = 'active'><a href=\"addBooks.php\">Tambah Buku</a></li>";
+			        		}
 			        	}
 			        ?>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Akses Cepat<span class="caret"></span></a>
@@ -33,7 +41,7 @@
 			            <li><a href="http://scele.cs.ui.ac.id/" target="_blank">Scele</a></li>
 			            <li><a href="http://google.com/" target="_blank">Google</a></li>
 			          </ul>
-			         </li>
+			         </li> 
 			        <li><a href="#">About Us</a></li>
 			      </ul>
 			      <ul class="nav navbar-nav navbar-right">
@@ -63,39 +71,8 @@
 			</nav>
 		</div>
 		<div class="container">
-			<div id="layout" class="row">
-				<div id="buku" class="col-md-9 text-justify row">
-					<?php 
-						generateBookPage();
-					?>
-				</div>
-				<div id="warning" class="col-md-3">
-					Buku bla bla bla
-				</div>
-			</div>
-			<div id="review" class="row">
-				<div id="box">
-					<h4>Kolom Review</h4>
-				</div>
-				<?php 
-					if(!generateReview()){
-						echo "<h6>Tidak ada review</h6>";
-					}
-					if(isset($_SESSION['login']) && $_SESSION['login'] && $_SESSION['role'] == "user"){
-						$thisid = $_GET['id'];
-						echo"
-						<div>
-							<div id=\"review\">
-								<form>
-									<div>
-										<textarea rows=\"3\" cols=\"50\" id=\"review-box\" placeholder=\"Tulis disini\"></textarea>
-									</div>
-								</form><input type=\"hidden\" id=\"hiddenid\" value=\"$thisid\"/>
-								<button id=\"review-btn\">Submit Review</button>
-							</div>
-						</div>";
-					}
-				?>
+			<div id="book-container" class="text-justify">
+				
 			</div>
 		</div>
 	</body>
