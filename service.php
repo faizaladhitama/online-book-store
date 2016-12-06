@@ -444,11 +444,17 @@
 						echo "<div id=\"button\" class=\"panel row\">
 								<form action=\"service.php\" class=\"form\" method=\"get\">
 									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>";
-						if(!bookIsEmpty() && $_SESSION['role'] == "user"){
-							if(!loanIsEmpty()){
-								echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"return\">Kembalikan buku</button>";
-							}else{
-								echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"loan\">Pinjam Buku</button><div class=\"col-md-1\"></div>";	
+						if($_SESSION['role'] == "user"){
+							if(!bookIsEmpty()){
+								if(!loanIsEmpty()){
+									echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"return\">Kembalikan buku</button>";
+								}else{
+									echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"loan\">Pinjam Buku</button><div class=\"col-md-1\"></div>";	
+								}
+							} else {
+								if(!loanIsEmpty()){
+									echo "<button type=\"submit\" class=\"btn btn-danger btn-sm btn-xl col-md-2\" name=\"command\" value=\"return\">Kembalikan buku</button>";
+								}
 							}
 						}
 
