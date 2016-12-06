@@ -41,7 +41,7 @@
 					header("Location:index.php");
 				}
 				else{
-					$_SESSION['warning'] = "Username atau password tidak ada";
+					$_SESSION['notfound'] = "Username atau password tidak ada";
 					header("Location: login.php");
 				}
 			}
@@ -127,6 +127,15 @@
 		}
 	}
 
+	function generateNotification(){
+		$notification = $_SESSION['notification'];
+		$words = explode(" ", $notification);
+		$new_string = "";
+		foreach($words as $word){
+			$new_string.="<h1>" . $word . "</h1>";
+		}
+		return $new_string;
+	}
 	function uploadBook(){
 		$image = $_FILES['image'];
 		$file_name = $image['name'];
@@ -230,6 +239,7 @@
 		$conn = connectDB();
 		$date ="date";
 		$sql = "INSERT INTO review (book_id,user_id,$date,content) VALUES ('$thisid', '$user_id','$today','$content')";
+		$_SESSION['notification'] = "Review Berhasil Dibuat";
 		mysqli_query($conn, $sql);
 	}
 
@@ -248,6 +258,7 @@
 				while($row = mysqli_fetch_row($result)) {
 			    	$idbuku = $row[0];
 			    	$stok = $row[6];
+			    	$_SESSION['notification'] = "Buku Berhasil Dipinjam";
 			    	setStock($idbuku,$stok,-1);
 			    }
 			} else {
@@ -276,6 +287,7 @@
 			while($row = mysqli_fetch_row($result)) {
 		    	$idbuku = $row[0];
 		    	$stok = $row[6];
+		    	$_SESSION['notification'] = "Buku Berhasil Dikembalikkan";
 		    	setStock($idbuku,$stok,1);
 		    }
 		}

@@ -13,12 +13,19 @@
 	<script src="javascript.js"></script>
 </head>
 <body>
+	<?php 
+		if(isset($_SESSION['warning'])){
+    		$warning = $_SESSION['warning'];
+    		echo "<script>alert(\"$warning\")</script>";
+    		unset($_SESSION['warning']);
+    	}
+	?>
 	<div class="container">
 		<div id="warning">
 		<?php
-			if(isset($_SESSION['warning'])){ 
-				echo $_SESSION['warning'];
-				session_unset($_SESSION['warning']);
+			if(isset($_SESSION['notfound'])){ 
+				echo $_SESSION['notfound'];
+				session_unset($_SESSION['notfound']);
 			}
 		?>
 		</div>

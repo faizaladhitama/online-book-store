@@ -1,6 +1,13 @@
 <?php
 	include("service.php");
-	if(!isset($_SESSION['login']) || !$_SESSION['login']){
+	if(isset($_SESSION['login']) && $_SESSION['login']){
+		if($_SESSION['role'] == "admin"){
+			$_SESSION['warning'] = "Halaman ini hanya bisa diakses oleh user";
+			header("Location:index.php");
+		}
+	}
+	else{
+		$_SESSION['warning'] = "Anda harus login terlebih dahulu";
 		header("Location:login.php");
 	}
 ?>

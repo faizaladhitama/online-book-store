@@ -69,9 +69,14 @@
 						generateBookPage();
 					?>
 				</div>
-				<div id="warning" class="col-md-3">
-					Buku bla bla bla
-				</div>
+				<?php 
+					if(isset($_SESSION['notification'])){
+						echo "<div id=\"warning\" style=\"border:1px solid black;padding-bottom:5%;position:relative\" class=\"col-md-3\">";
+						echo generateNotification();
+						echo "</div>";
+						unset($_SESSION['notification']);
+					}
+				?>
 			</div>
 			<div id="review" class="row">
 				<div id="box">
