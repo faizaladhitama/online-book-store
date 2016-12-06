@@ -76,9 +76,9 @@
 		<div class="container">
 			<div id="book-container">
 				<?php
-					if(isset($_SESSION['warning'])){
+					if(isset($_SESSION['file_error'])){
 						echo "<script>alert(\"File yang anda masukkan tidak sesuai format\")</script>"; 
-						unset($_SESSION['warning']);
+						unset($_SESSION['']);
 					}
 				?>
 				<div class="text-center panel">

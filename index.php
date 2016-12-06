@@ -14,6 +14,7 @@
 	</head>
 	<body>
         <?php 
+        	//echo $_SESSION['warning'];
         	if(isset($_SESSION['warning'])){
         		$warning = $_SESSION['warning'];
         		echo "<script>alert(\"$warning\")</script>";
@@ -37,8 +38,8 @@
 			        <li class="active"><a href="index.php">Home</a></li>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Halaman Pengguna<span class="caret"></span></a>
 			          <ul class="dropdown-menu">
-			            <li><a href="addBooks.php" target="_blank">Tambah Buku</a></li>
-			            <li><a href="user.php" target="_blank">Halaman Peminjaman</a></li>
+			            <li><a href="addBooks.php">Tambah Buku</a></li>
+			            <li><a href="user.php">Halaman Peminjaman</a></li>
 			          </ul>
 			         </li>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Akses Cepat<span class="caret"></span></a>

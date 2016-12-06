@@ -30,7 +30,12 @@
 			    <div class="collapse navbar-collapse" id="myNavbar">
 			      <ul class="nav navbar-nav">
 			        <li><a href="index.php">Home</a></li>
-			        <li class="active"><a href="user.php">Halaman Peminjaman</a></li>
+			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Halaman Pengguna<span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			            <li><a href="addBooks.php">Tambah Buku</a></li>
+			            <li><a href="user.php">Halaman Peminjaman</a></li>
+			          </ul>
+			         </li>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Akses Cepat<span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			            <li><a href="http://www.w3schools.com/" target="_blank">W3 School</a></li>

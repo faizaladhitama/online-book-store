@@ -161,7 +161,7 @@
 				header("Location:index.php");
 			}
 			else{
-				$_SESSION['warning'] = true;
+				$_SESSION['file_error'] = true;
 				header("Location:addBooks.php");
 			}
 		}else{

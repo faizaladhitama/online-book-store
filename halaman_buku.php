@@ -19,14 +19,22 @@
 		</div>
 		<div id="navbar">
 			<nav class="navbar navbar-inverse">
+				<div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>                        
+			      </button>
+			    </div>
 			    <div class="collapse navbar-collapse" id="myNavbar">
 			      <ul class="nav navbar-nav">
 			        <li><a href="index.php">Home</a></li>
-			        <?php 
-			        	if(isset($_SESSION['login']) && $_SESSION['login']){
-			        		echo "<li><a href=\"user.php\">Halaman Peminjaman</a></li>";
-			        	}
-			        ?>
+			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Halaman Pengguna<span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			            <li><a href="addBooks.php">Tambah Buku</a></li>
+			            <li><a href="user.php">Halaman Peminjaman</a></li>
+			          </ul>
+			         </li>
 			        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Akses Cepat<span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			            <li><a href="http://www.w3schools.com/" target="_blank">W3 School</a></li>
