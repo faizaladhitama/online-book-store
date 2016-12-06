@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<title>Perpustakaan Online</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -19,8 +20,8 @@
         		unset($_SESSION['warning']);
         	}
         ?>
-		<div id="header" class="container-fluid page-header">
-			<h2 class="col-md-4">PERPUSTAKAAN ONLINE</h3>
+		<div id="header" class="container-fluid page-header" style="padding:2%">
+			<h1 class="text-center">Perpustakaan Online</h1>
 		</div>
 		<div id="navbar">
 			<nav class="navbar navbar-inverse">
@@ -76,7 +77,7 @@
 			</nav>
 		</div>
 		<div class="container">
-			<div id="book-container" class="text-justify">
+			<div id="book-container">
 				<?php 
 					generateHome();
 				?>

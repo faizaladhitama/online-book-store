@@ -11,7 +11,6 @@
 		header("Location:login.php");
 	}
 ?>
-
 <html>
 	<head>
 		<title>Halaman Peminjaman</title>

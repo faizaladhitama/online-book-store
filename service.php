@@ -469,7 +469,6 @@
 		$result = mysqli_query($conn, $sql);
 		//echo $result;
 		if (mysqli_num_rows($result) > 0) {
-		    // output data of each row
 		    while($row = mysqli_fetch_row($result)) {
 		    	$idbuku = $row[0];
 		    	$gambar = $row[1];
@@ -482,13 +481,23 @@
 		    	if($idbuku%2 == 1){
 		    		echo "<div class=\"row\">";
 		    	}
-		    	echo "<div class=\"col-md-6 panel\">
+		    	echo "<div id=\"home\" class=\"col-md-6 panel\" style=\"line-height:200%;margin-bottom:5%;\">
 						<img src=\"uploads/$idbuku.jpg\" class=\"img-responsive\"/>
-						<p>$judul</p>
-						<form action=\"service.php\" class=\"form\" method=\"get\">
-							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
-							<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Deskripsi Buku</button>
-						</form>
+						<div style=\"margin-top:4%\">
+							<div style=\"width:350px;height:30px;overflow:hidden;white-space:pre;text-overflow:ellipsis;\"><span style=\"font-size:125%\">Title</span>     :  $judul
+							</div>
+							<div>
+								<span style=\"font-size:125%\">Author</span> :  $pengarang
+							</div>
+							<div style=\"white-space:pre\"><span style=\"font-size:125%\">Stock</span>   : $stok
+							</div>
+						</div>
+						<div style=\"margin-top:-3%\">
+							<form action=\"service.php\" class=\"form\" method=\"get\">
+								<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
+								<button type=\"submit\" class=\"btn btn-danger btn-xs btn-sm btn-xl\" name=\"command\" value=\"bookpage\">Deskripsi Buku</button>
+							</form>
+						</div>
 					</div>";
 				if($idbuku%2==0){
 					echo"</div>";
