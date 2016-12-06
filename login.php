@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 	<script src="javascript.js"></script>
+	<link rel="stylesheet" type="text/css" href="loginStyle.css">
 </head>
 <body>
 	<?php 
@@ -20,7 +21,7 @@
     		unset($_SESSION['warning']);
     	}
 	?>
-	<div class="container">
+	<div id="loginform" class="container">
 		<div id="warning">
 		<?php
 			if(isset($_SESSION['notfound'])){ 
@@ -29,10 +30,10 @@
 			}
 		?>
 		</div>
-		<h2>Login Form</h2>
+		<h2 class="judul">Login Form</h2>
 		<form class="form-horizontal" id="loginForm" name="loginForm" action="service.php" method="POST">
 			<div class="form-group">
-				<label class="control-label col-sm-2">Username : </label>
+				<label class="control-label col-sm-4">Username : </label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
 				</div>
@@ -42,7 +43,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2">Password : </label>
+				<label class="control-label col-sm-4">Password : </label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
 				</div>
@@ -53,8 +54,8 @@
 			</div>
 			<input type="hidden" name="command" value="login"/>
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input id="login-btn" type="submit" class="submit" Value="Submit" class="btn btn-primary"/>
+				<div class="col-sm-offset-2 col-sm-4">
+					<input id="login-btn" type="submit" class="submit btn btn-warning" Value="Submit">
 				</div>
 			</div>
 		</form>

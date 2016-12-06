@@ -1,0 +1,17 @@
+body {
+	background-image: url("library.jpg");
+	background-size: 100%;
+	background-repeat: none;
+	color: white;
+}
+#loginform{
+	position:absolute;
+	margin:auto;
+	top:50%;
+	left:50%;
+	width:550px;
+	height:225px;
+	transform:translate(-50%,-50%);
+	background-image: url("background.jpg");
+	background-size: 100%;
+}
