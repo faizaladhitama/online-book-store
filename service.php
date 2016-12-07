@@ -156,7 +156,7 @@
 
 		if(!searchBook($title)){
 			if(($file_ext=="png" || $file_ext=="jpg") && $file_size <= 4000000){
-				move_uploaded_file($file_tmp,("images/uploads/".$new_name));
+				move_uploaded_file($file_tmp,("src/images/uploads/".$new_name));
 				$sql = "INSERT INTO book (img_path,title,author,publisher,description,quantity) VALUES ('$new_name', '$title','$author','$publisher','$description','$quantity')";
 				mysqli_query($conn, $sql);
 				header("Location:index.php");
@@ -407,7 +407,7 @@
 		    	$stok = $row[6];
 
 		    	echo "<div id=\"gambar\" class=\"panel row no-background\">
-						<img src=\"images/uploads/$idbuku.jpg\" class=\"img-responsive\">
+						<img src=\"src/images/uploads/$idbuku.jpg\" class=\"img-responsive\">
 					</div>
 					<div id=\"identitas\" class=\"panel row\">
 						<div id=\"title\" class=\"panel\">
@@ -479,7 +479,7 @@
 		    		echo "<div class=\"row\">";
 		    	}
 		    	echo "<div id=\"home\" class=\"col-md-6 panel\" style=\"line-height:200%;margin-bottom:5%;\">
-						<img src=\"images/uploads/$idbuku.jpg\" class=\"img-responsive\"/>
+						<img src=\"src/images/uploads/$idbuku.jpg\" class=\"img-responsive\"/>
 						<div style=\"margin-top:4%\">
 							<div style=\"width:350px;height:30px;overflow:hidden;white-space:pre;text-overflow:ellipsis;\"><span style=\"font-size:125%\">Title</span>     :  $judul
 							</div>
@@ -542,7 +542,7 @@
 		    	
 		    	echo "<div class=\"row\">";		    	
 		    	echo "<div id=\"user-books\" class=\"col-md-6 panel\">
-						<img src=\"images/uploads/$idbuku.jpg\" class=\"img-responsive\"/>
+						<img src=\"src/images/uploads/$idbuku.jpg\" class=\"img-responsive\"/>
 						<p>$judul</p>
 						<form action=\"service.php\" class=\"form\" method=\"get\">
 							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>
