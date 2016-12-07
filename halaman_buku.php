@@ -11,7 +11,7 @@
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="src/css/style.css">
-		<script src="src/javascript/javascript.js"></script>
+		<script src="src/javascript/js.js"></script>
 	</head>
 	<body>
 		<div id="header" class="container-fluid" style="padding:4%">
