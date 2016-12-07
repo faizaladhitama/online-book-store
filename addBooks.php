@@ -22,7 +22,7 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<div id="header" class="container-fluid page-header">
+		<div id="header" class="container-fluid" style="padding:4%">
 			<h2 class="col-md-4">PERPUSTAKAAN ONLINE</h3>
 		</div>
 		<div id="navbar">
@@ -81,7 +81,7 @@
 						unset($_SESSION['']);
 					}
 				?>
-				<div class="text-center panel">
+				<div class="text-center panel" id="label">
 					<h2>Input Database</h2>
 				</div>
 				<form class="form-horizontal" method="POST" action="service.php" enctype="multipart/form-data">
