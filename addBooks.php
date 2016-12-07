@@ -14,20 +14,20 @@
 <html>
 	<head>
 		<title>Halaman Admin</title>
+		<meta charset="UTF-8">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-<<<<<<< HEAD
 		<link rel="stylesheet" href="src/css/style.css">
-=======
->>>>>>> 2eb2dbb95f1ce0e26c59fd92b5684a212eafb5eb
+		<script src="src/javascript/js.js"></script>
 	</head>
 	<body>
 		<div id="header" class="container-fluid" style="padding:4%">
 			<h2 class="col-md-4">PERPUSTAKAAN ONLINE</h3>
 		</div>
+		<!--http://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
 		<div id="navbar">
 			<nav class="navbar navbar-inverse">
 				<div class="navbar-header">
@@ -53,7 +53,6 @@
 			            <li><a href="http://google.com/" target="_blank">Google</a></li>
 			          </ul>
 			         </li> 
-			        <li><a href="#">About Us</a></li>
 			      </ul>
 			      <ul class="nav navbar-nav navbar-right">
 			      	<?php 

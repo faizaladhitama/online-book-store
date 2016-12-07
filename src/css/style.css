@@ -26,6 +26,10 @@
 
 body{
 	background-image: url("../images/background/background1.jpg");
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 }
 
 textarea{

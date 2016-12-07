@@ -4,13 +4,14 @@
 <html>
 	<head>
 		<title>Perpustakaan Online</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 		<link rel="stylesheet" href="src/css/style.css">
+		<script src="src/javascript/js.js"></script>
 	</head>
 	<body>
         <?php 
@@ -21,9 +22,10 @@
         	}
         ?>
 		<div id="header" class="container-fluid" style="padding:4%">
-			<h1 class="text-center">Perpustakaan Online</h1>
+			<h1 class="text-center">PERPUSTAKAAN ONLINE</h1>
 		</div>
-		<div id="navbar">
+		<!--http://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+		<div id="navbar" style="">
 			<nav class="navbar navbar-inverse">
 				<div class="navbar-header">
 			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -48,7 +50,6 @@
 			            <li><a href="http://google.com/" target="_blank">Google</a></li>
 			          </ul>
 			         </li> 
-			        <li><a href="#">About Us</a></li>
 			      </ul>
 			      <ul class="nav navbar-nav navbar-right">
 			      	<?php 

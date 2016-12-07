@@ -85,7 +85,7 @@
 		$mysql_username = 'root';
 		$mysql_password = '';
 		$conn = mysqli_connect($mysql_host, $mysql_username,$mysql_password);
-		$filename = 'personal_library.sql';
+		$filename = 'src/sql/personal_library.sql';
 		$sql = "CREATE DATABASE tugasakhirPPW";
 		if(mysqli_query($conn, $sql)){
 			mysqli_select_db($conn,"tugasakhirPPW");
@@ -111,9 +111,7 @@
 		$conn = connectDB();
 		$sql = "SELECT * FROM user";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
 		if (mysqli_num_rows($result) > 0) {
-		    // output data of each row
 		    while($row = mysqli_fetch_assoc($result)) {
 		        if($user == $row['username'] && $pass == $row['password']){
 		        	$_SESSION['id'] = $row['user_id']; 
@@ -174,10 +172,8 @@
 
 	function lastNumber(){
 		$lastid = 0;
-		
 		$conn = connectDB();
 		$sql = "SELECT * FROM book";
-
 		$result = mysqli_query($conn, $sql);
 		if (mysqli_num_rows($result) > 0) {
 		    while($row = mysqli_fetch_assoc($result)) {
@@ -203,9 +199,7 @@
 		$conn = connectDB();
 		$sql = "SELECT * FROM user where user_id=$id";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
 		if (mysqli_num_rows($result) > 0) {
-		    // output data of each row
 		    while($row = mysqli_fetch_assoc($result)) {
 		        if($id == $row['user_id']){
 		        	return $row['username'];
@@ -253,8 +247,6 @@
 		if (mysqli_query($conn, $sql)) {
 			$sql = "SELECT * FROM book WHERE book_id=$thisid";
 			$result = mysqli_query($conn, $sql);
-			//echo $result;
-
 			if (mysqli_num_rows($result) > 0) {
 				while($row = mysqli_fetch_row($result)) {
 			    	$idbuku = $row[0];
@@ -317,7 +309,6 @@
 		$conn = connectDB();
 		$sql = "SELECT * FROM loan";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_row($result)) {
 		    	$book_id = $row[1];
@@ -334,8 +325,6 @@
 		$conn = connectDB();
 		$sql = "SELECT * FROM loan";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
-
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_row($result)) {
 		    	$loan_id = $row[0];
@@ -357,8 +346,6 @@
 		$thisid= $_GET['id'];
 		$sql = "SELECT * FROM review WHERE book_id=$thisid";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
-
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_row($result)) {
 		    	$review_id = $row[0];
@@ -367,7 +354,6 @@
 		    	$date = $row[3];
 		    	$content = $row[4];
 		    	$name = searchName($user_id);
-
 		    	if($book_id == $thisid){
 		    		echo"
 		    		<div class=\"panel row\">
@@ -394,8 +380,6 @@
 		$thisid = $_GET['id'];
 		$sql = "SELECT * FROM book WHERE book_id=$thisid";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
-
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_row($result)) {
 		    	$idbuku = $row[0];
@@ -464,7 +448,6 @@
 		$conn = connectDB();
 		$sql = "SELECT * FROM book";
 		$result = mysqli_query($conn, $sql);
-		//echo $result;
 		if (mysqli_num_rows($result) > 0) {
 		    while($row = mysqli_fetch_row($result)) {
 		    	$idbuku = $row[0];
@@ -510,6 +493,7 @@
 		$sql = "SELECT * FROM loan";
 		$result = mysqli_query($conn, $sql);
 		$books = array();
+		$ada = false;
 		if(isset($_SESSION['login']) && $_SESSION['login']){
 			$user_id = $_SESSION['id'];
 			if (mysqli_num_rows($result) > 0) {
@@ -519,8 +503,15 @@
 		    		$idUser = $row[2];
 		    		if($idUser == $user_id){
 		    			showBook($idBook);
+		    			$ada = true;
 		    		}
 		    	}
+		    	if(!$ada){
+					echo "<div style=\"border:3px solid white;color:white\">";
+					echo "<h1>Anda sedang tidak meminjam buku apapun</h1>";
+					echo "<h1>Silahkan menuju ke halaman buku untuk meminjam buku</h1>";
+					echo "</div>";
+				}
 			}
 		}
 	}
@@ -538,8 +529,7 @@
 		    	$pengarang = $row[3];
 		    	$penerbit = $row[4];
 		    	$deskripsi = $row[5];
-		    	$stok = $row[6];
-		    	
+		    	$stok = $row[6];    	
 		    	echo "<div class=\"row\">";		    	
 		    	echo "<div id=\"user-books\" class=\"col-md-6 panel\">
 						<img src=\"src/images/uploads/$idbuku.jpg\" class=\"img-responsive\"/>

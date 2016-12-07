@@ -17,6 +17,7 @@
 		<div id="header" class="container-fluid" style="padding:4%">
 			<h2 class="col-md-4">PERPUSTAKAAN ONLINE</h3>
 		</div>
+		<!--http://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
 		<div id="navbar">
 			<nav class="navbar navbar-inverse">
 				<div class="navbar-header">
@@ -42,7 +43,6 @@
 			            <li><a href="http://google.com/" target="_blank">Google</a></li>
 			          </ul>
 			         </li>
-			        <li><a href="#">About Us</a></li>
 			      </ul>
 			      <ul class="nav navbar-nav navbar-right">
 			      	<?php 
@@ -79,7 +79,7 @@
 				</div>
 				<?php 
 					if(isset($_SESSION['notification'])){
-						echo "<div id=\"warning\" style=\"border:1px solid black;padding-bottom:5%;position:relative\" class=\"col-md-3\">";
+						echo "<div id=\"warning\" style=\"border:3px solid white;padding-bottom:5%;color:white;position:relative\" class=\"col-md-3\">";
 						echo generateNotification();
 						echo "</div>";
 						unset($_SESSION['notification']);
@@ -87,12 +87,12 @@
 				?>
 			</div>
 			<div id="review" class="row">
-				<div id="box">
+				<div id="box" class="row" style="color:white;">
 					<h4>Kolom Review</h4>
 				</div>
 				<?php 
 					if(!generateReview()){
-						echo "<h6>Tidak ada review</h6>";
+						echo "<h6 style=\"color:white;\">Tidak ada review</h6>";
 					}
 					if(isset($_SESSION['login']) && $_SESSION['login'] && $_SESSION['role'] == "user"){
 						$thisid = $_GET['id'];
