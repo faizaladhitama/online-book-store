@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function(){	
 	$("#review-btn").on("click", createReview);
 
 	$('#loginForm').submit(function () {
@@ -23,12 +23,12 @@ $(document).ready(function(){
 		
 		if(username.length == 0 || username.length > 24){
 			span1.innerHTML = "Username tidak sesuai format</br>";
-			span2.innerHTML = "Username tidak boleh kosong dan memiliki panjang kurang dari 25";
+			//span2.innerHTML = "Username tidak boleh kosong dan memiliki panjang kurang dari 25";
 			error = true;
 		}
 		if(password.length == 0){
 			span3.innerHTML = "Password tidak sesuai format</br>";
-			span4.innerHTML = "Password tidak boleh kosong";
+			//span4.innerHTML = "Password tidak boleh kosong";
 			error = true;
 		}
 

@@ -37,7 +37,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
 				</div>
-				<div class ="col-sm-4">
+				<div class ="col-sm-offset-2 col-sm-10">
 					<span id="span1"></span>
 					<span id="span2"></span>
 				</div>
@@ -47,7 +47,7 @@
 				<div class="col-sm-6">
 					<input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
 				</div>
-				<div class ="col-sm-4">
+				<div class ="col-sm-offset-2 col-sm-10">
 					<span id="span3"></span>
 					<span id="span4"></span>
 				</div>
