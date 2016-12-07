@@ -3,10 +3,22 @@
 	width: 350px;
 }
 
+#home{
+	background:none;
+	color:white;
+}
+
+#header{
+	background-color:white;
+}
 #book-container{
 	position: relative;
 	left:4%;
 	margin-top:3%;
+}
+
+body{
+	background-image: url("images/background/background1.jpg");
 }
 
 textarea{
