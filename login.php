@@ -39,8 +39,8 @@
 						<input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
 					</div>
 				</div>
-				<div class ="col-sm-offset-1 col-sm-9">
-					<span style="color:red" id="span1"></span>
+				<div class ="col-sm-offset-2 col-sm-9">
+					<span style="color:red" class="error-message" id="span1"></span>
 				</div>
 			</div>
 			<div class="form-group" style="padding:3%">
@@ -50,8 +50,8 @@
 						<input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
 					</div>
 				</div>
-				<div class ="col-sm-offset-1 col-sm-9">
-					<span style="color:red" id="span2"></span>
+				<div class ="col-sm-offset-2 col-sm-9">
+					<span style="color:red" class="error-message" id="span2"></span>
 				</div>
 			</div>
 			<input type="hidden" name="command" value="login"/>
