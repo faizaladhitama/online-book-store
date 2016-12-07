@@ -19,7 +19,10 @@
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+<<<<<<< HEAD
 		<link rel="stylesheet" href="src/css/style.css">
+=======
+>>>>>>> 2eb2dbb95f1ce0e26c59fd92b5684a212eafb5eb
 	</head>
 	<body>
 		<div id="header" class="container-fluid" style="padding:4%">

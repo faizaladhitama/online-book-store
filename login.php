@@ -39,8 +39,14 @@
 						<input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
 					</div>
 				</div>
+<<<<<<< HEAD
 				<div class ="col-sm-3">
 					<span id="span1"></span>
+=======
+				<div class ="col-sm-offset-2 col-sm-10">
+					<span style="color : red" id="span1"></span>
+					<span id="span2"></span>
+>>>>>>> 2eb2dbb95f1ce0e26c59fd92b5684a212eafb5eb
 				</div>
 			</div>
 			<div class="form-group">
@@ -50,8 +56,14 @@
 						<input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
 					</div>
 				</div>
+<<<<<<< HEAD
 				<div class ="col-sm-3">
 					<span id="span2"></span>
+=======
+				<div class ="col-sm-offset-2 col-sm-10">
+					<span style="color : red" id="span3"></span>
+					<span id="span4"></span>
+>>>>>>> 2eb2dbb95f1ce0e26c59fd92b5684a212eafb5eb
 				</div>
 			</div>
 			<input type="hidden" name="command" value="login"/>
