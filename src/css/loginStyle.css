@@ -1,21 +1,21 @@
 body {
 	background-image: url("../images/background/library.jpg");
-	background-size: 100%;
-	background-repeat: none;
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 	color: white;
 }
 #loginform{
 	position:absolute;
-	top:50%;
-	left:50%;
-	width:30%;
-	height:50%;
-	transform:translate(-50%,-50%);
+	top:20%;
+	left:5%;
+	width:600px;
+	height:400px;
 	background-image: url("../images/background/background.jpg");
-	background-size: 100%;
-}
-
-.inputan{
-	position:relative;
-	left:-20%;
+	background-size: cover;
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 }

@@ -2,9 +2,8 @@ $(document).ready(function(){
 			
 	$("#review-btn").on("click", createReview);
 
-	$('#loginForm').submit(function () {
-		//loginClientCheck();
-		alert("test");
+	$('#loginFormAction').submit(function () {
+		loginClientCheck();
 		return false;
 	});
 	
@@ -19,8 +18,6 @@ $(document).ready(function(){
 		span1.innerHTML = "";
 		span2.innerHTML = "";
 		
-
-		alert("error");
 		if(username.length >= 20){
 			span1.innerHTML = "Username tidak sesuai format";
 			error = true;
