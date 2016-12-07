@@ -20,7 +20,7 @@
         		unset($_SESSION['warning']);
         	}
         ?>
-		<div id="header" class="container-fluid page-header" style="padding:2%">
+		<div id="header" class="container-fluid" style="padding:2%">
 			<h1 class="text-center">Perpustakaan Online</h1>
 		</div>
 		<div id="navbar">
