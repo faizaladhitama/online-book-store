@@ -14,7 +14,6 @@
 	</head>
 	<body>
         <?php 
-        	//echo $_SESSION['warning'];
         	if(isset($_SESSION['warning'])){
         		$warning = $_SESSION['warning'];
         		echo "<script>alert(\"$warning\")</script>";

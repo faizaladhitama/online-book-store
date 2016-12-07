@@ -1,5 +1,5 @@
 body {
-	background-image: url("library.jpg");
+	background-image: url("images/background/library.jpg");
 	background-size: 100%;
 	background-repeat: none;
 	color: white;
@@ -12,6 +12,6 @@ body {
 	width:550px;
 	height:225px;
 	transform:translate(-50%,-50%);
-	background-image: url("background.jpg");
+	background-image: url("images/background/background.jpg");
 	background-size: 100%;
 }
