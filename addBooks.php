@@ -21,7 +21,7 @@
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 	</head>
 	<body>
-		<div id="header" class="container-fluid page-header">
+		<div id="header" class="container-fluid" style="padding:4%">
 			<h2 class="col-md-4">PERPUSTAKAAN ONLINE</h3>
 		</div>
 		<div id="navbar">
@@ -77,10 +77,10 @@
 				<?php
 					if(isset($_SESSION['file_error'])){
 						echo "<script>alert(\"File yang anda masukkan tidak sesuai format\")</script>"; 
-						unset($_SESSION['']);
+						unset($_SESSION['file_error']);
 					}
 				?>
-				<div class="text-center panel">
+				<div class="text-center panel" id="label">
 					<h2>Input Database</h2>
 				</div>
 				<form class="form-horizontal" method="POST" action="service.php" enctype="multipart/form-data">
@@ -117,7 +117,7 @@
 					<div class="form-group">
 						<label for="quantity" class="control-label col-sm-2">Quantity :</label>
 						<div class="col-sm-8">
-							<input type="number" class="form-control" name="quantity" required/>
+							<input type="number" class="form-control" name="quantity" min="1" required/>
 						</div>
 					</div>
 					<div class="form-group">

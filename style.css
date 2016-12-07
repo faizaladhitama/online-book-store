@@ -3,9 +3,16 @@
 	width: 350px;
 }
 
-#home{
+.space{
+	white-space:pre;
+}
+#home,label,#label,#user-books{
 	background:none;
 	color:white;
+}
+
+.no-background{
+	background:none;	
 }
 
 #header{

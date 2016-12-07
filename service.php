@@ -79,6 +79,7 @@
 		return $conn;
 	}
 
+	/*Sumber kode : http://stackoverflow.com/questions/19751354/how-to-import-sql-file-in-mysql-database-using-php*/
 	function import_database(){
 		$mysql_host = 'localhost';
 		$mysql_username = 'root';
@@ -369,7 +370,7 @@
 
 		    	if($book_id == $thisid){
 		    		echo"
-		    		<div class=\"panel\">
+		    		<div class=\"panel row\">
 						<div id=\"user\">
 							$name
 						</div>
@@ -405,43 +406,33 @@
 		    	$deskripsi = $row[5];
 		    	$stok = $row[6];
 
-		    	echo "<div id=\"gambar\" class=\"panel row\">
+		    	echo "<div id=\"gambar\" class=\"panel row no-background\">
 						<img src=\"images/uploads/$idbuku.jpg\" class=\"img-responsive\">
 					</div>
 					<div id=\"identitas\" class=\"panel row\">
 						<div id=\"title\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Nama Buku
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
+								<p class=\"col-md-3 col-sm-3 space\">Nama Buku:</p>
 								<p class=\"col-md-8 col-sm-8\">$judul</p>
 							</div>
 							<div id=\"author\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Pengarang
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
+								<p class=\"col-md-3 col-sm-3 space\">Pengarang :</p>
 								<p class=\"col-md-8 col-sm-8\">$pengarang</p>
 							</div>
 							<div id=\"publisher\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Penerbit
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
+								<p class=\"col-md-3 col-sm-3 space\">Penerbit     :</p>
 								<p class=\"col-md-8 col-sm-8\">$penerbit</p>
 							</div>
 							<div id=\"description\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Deskripsi
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
+								<p class=\"col-md-3 col-sm-3 space\">Deskripsi    :</p>
 								<p class=\"col-md-8 col-sm-8\">$deskripsi</p>
 							</div>
 							<div id=\"quantity\" class=\"panel\">
-								<p class=\"col-md-3 col-sm-3\">Stok
-									<span class=\"col-md-1 col-sm-1 pull-right\">:</span>
-								</p>
+								<p class=\"col-md-3 col-sm-3 space\">Stok           :</p>
 								<p class=\"col-md-8 col-sm-8\">$stok</p>
 							</div>
 					</div>";
 					if(isset($_SESSION['login']) && $_SESSION['login']){
-						echo "<div id=\"button\" class=\"panel row\">
+						echo "<div id=\"button\" class=\"no-background panel row\">
 								<form action=\"service.php\" class=\"form\" method=\"get\">
 									<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>";
 						if($_SESSION['role'] == "user"){
@@ -550,8 +541,8 @@
 		    	$stok = $row[6];
 		    	
 		    	echo "<div class=\"row\">";		    	
-		    	echo "<div class=\"col-md-6 panel\">
-						<img src=\"uploads/$idbuku.jpg\" class=\"img-responsive\"/>
+		    	echo "<div id=\"user-books\" class=\"col-md-6 panel\">
+						<img src=\"images/uploads/$idbuku.jpg\" class=\"img-responsive\"/>
 						<p>$judul</p>
 						<form action=\"service.php\" class=\"form\" method=\"get\">
 							<input type=\"hidden\" name=\"idbuku\" value=\"$idbuku\"/>

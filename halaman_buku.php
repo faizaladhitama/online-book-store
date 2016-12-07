@@ -14,7 +14,7 @@
 		<script src="javascript.js"></script>
 	</head>
 	<body>
-		<div id="header" class="container-fluid page-header">
+		<div id="header" class="container-fluid" style="padding:4%">
 			<h2 class="col-md-4">PERPUSTAKAAN ONLINE</h3>
 		</div>
 		<div id="navbar">
@@ -97,7 +97,7 @@
 					if(isset($_SESSION['login']) && $_SESSION['login'] && $_SESSION['role'] == "user"){
 						$thisid = $_GET['id'];
 						echo"
-						<div>
+						<div class=\"row\">
 							<div id=\"review\">
 								<form>
 									<div>

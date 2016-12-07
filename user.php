@@ -21,7 +21,7 @@
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 	</head>
 	<body>
-		<div id="header" class="container-fluid page-header">
+		<div id="header" class="container-fluid" style="padding:4%">
 			<h2 class="col-md-4">PERPUSTAKAAN ONLINE</h3>
 		</div>
 		<div id="navbar">
