@@ -152,6 +152,11 @@
 		$description = $_POST['description'];
 		$quantity = $_POST['quantity'];
 
+		if($quantity < 0){
+			$_SESSION['wrong_input'] = true;
+			header("Location:addBooks.php");
+		}
+
 		$conn = connectDB();
 
 		if(!searchBook($title)){

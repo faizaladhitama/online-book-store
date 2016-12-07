@@ -78,7 +78,10 @@
 				<?php
 					if(isset($_SESSION['file_error'])){
 						echo "<script>alert(\"File yang anda masukkan tidak sesuai format\")</script>"; 
-						unset($_SESSION['']);
+						unset($_SESSION['file_error']);
+					}else if(isset($_SESSION['wrong_input'])){
+						echo "<script>alert(\"Quantity tidak boleh bilangan negative\")</script>"; 
+						unset($_SESSION['wrong_input']);
 					}
 				?>
 				<div class="text-center panel" id="label">
