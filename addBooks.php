@@ -79,9 +79,6 @@
 					if(isset($_SESSION['file_error'])){
 						echo "<script>alert(\"File yang anda masukkan tidak sesuai format\")</script>"; 
 						unset($_SESSION['file_error']);
-					}else if(isset($_SESSION['wrong_input'])){
-						echo "<script>alert(\"Quantity tidak boleh bilangan negative\")</script>"; 
-						unset($_SESSION['wrong_input']);
 					}
 				?>
 				<div class="text-center panel" id="label">
@@ -121,7 +118,7 @@
 					<div class="form-group">
 						<label for="quantity" class="control-label col-sm-2">Quantity :</label>
 						<div class="col-sm-8">
-							<input type="number" class="form-control" name="quantity" required/>
+							<input type="number" class="form-control" name="quantity" min="1" required/>
 						</div>
 					</div>
 					<div class="form-group">
